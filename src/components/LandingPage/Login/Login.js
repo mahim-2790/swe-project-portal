@@ -1,10 +1,12 @@
-import { Button, Container, Grid, TextField, Typography } from '@mui/material';
+import { Alert, Button, Container, Grid, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import loginPic from '../../../Asset/images/undraw_programming_re_kg9v.svg';
+import useAuth from '../../../hooks/useAuth';
 
 const Login = () => {
     const [loginData, setLoginData] = useState({});
+    const { user, login, error } = useAuth();
 
     const handleOnBlur = e => {
         const field = e.target.name;
@@ -12,6 +14,11 @@ const Login = () => {
         const newLoginData = { ...loginData };
         newLoginData[field] = value;
         setLoginData(newLoginData);
+        e.preventDefault();
+    };
+
+    const handleOnSubmit = e => {
+        login(loginData.email, loginData.password);
         e.preventDefault();
     };
 
@@ -25,7 +32,7 @@ const Login = () => {
                     <Typography variant="h4" sx={{ mb: 5 }}>
                         Login
                     </Typography>
-                    <form action="">
+                    <form action="" onSubmit={handleOnSubmit}>
                         <div>
                             <TextField
                                 id="standard-basic"
@@ -49,7 +56,9 @@ const Login = () => {
                                 <Link to="/login">Forgot password?</Link>
                             </Typography>
                         </div>
-                        <Button variant="contained">Login</Button>
+                        {user?.email && <Alert severity="success">Login Successfully</Alert>}
+                        {error && <Alert severity="error">{error}</Alert>}
+                        <Button variant="contained" type="submit">Login</Button>
 
                     </form>
                     <Typography variant="caption" display="block" gutterBottom sx={{ mt: 1, textAlign: 'center' }}>
