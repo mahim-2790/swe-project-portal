@@ -1,8 +1,8 @@
-import initializeFirebase from "./firebase.init";
-import { getAnalytics } from "firebase/analytics";
+// import initializeFirebase from "./firebase.init";
+// import { getAnalytics } from "firebase/analytics";
 
 const initializeAnalytics = () => {
-    const app = initializeFirebase();
-    getAnalytics(app);
+    // const app = initializeFirebase();
+    // getAnalytics(app);
 };
 export default initializeAnalytics;
