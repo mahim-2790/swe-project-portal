@@ -14,7 +14,6 @@ const Login = () => {
         const newLoginData = { ...loginData };
         newLoginData[field] = value;
         setLoginData(newLoginData);
-        e.preventDefault();
     };
 
     const handleOnSubmit = e => {
@@ -35,8 +34,8 @@ const Login = () => {
                     <form action="" onSubmit={handleOnSubmit}>
                         <div>
                             <TextField
-                                id="standard-basic"
-                                label="Username/Email"
+                                id="email"
+                                label="Email"
                                 variant="standard"
                                 sx={{ width: "85%" }}
                                 type="email"
@@ -44,7 +43,7 @@ const Login = () => {
                                 onBlur={handleOnBlur}
                             />
                             <TextField
-                                id="standard-basic"
+                                id="password"
                                 label="Password"
                                 variant="standard"
                                 sx={{ width: "85%", mt: 3 }}
@@ -62,7 +61,7 @@ const Login = () => {
 
                     </form>
                     <Typography variant="caption" display="block" gutterBottom sx={{ mt: 1, textAlign: 'center' }}>
-                        New User?<Link to="/login">Register</Link>
+                        New User?<Link to="/registration">Register</Link>
                     </Typography>
                 </Grid>
             </Grid>
