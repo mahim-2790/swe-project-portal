@@ -1,9 +1,10 @@
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
-import LandingPage from './components/LandingPage/LandingPage/LandingPage';
-import Registration from './components/LandingPage/Registration/Registration';
-import AuthProvider from './context/AuthProvider';
+import AuthProvider from './contexts/AuthProvider/AuthProvider';
+import LandingPage from './Pages/Login/LandingPage/LandingPage';
+import Register from './Pages/Login/Register/Register';
+
 
 function App() {
   return (
@@ -11,11 +12,11 @@ function App() {
       <AuthProvider>
         <Router>
           <Switch>
+            <Route path="/registration">
+              <Register></Register>
+            </Route>
             <Route path="/login">
               <LandingPage></LandingPage>
-            </Route>
-            <Route path="/registration">
-              <Registration></Registration>
             </Route>
             <Route path="/">
               <LandingPage></LandingPage>

@@ -1,37 +1,40 @@
-import { Alert, Button, Container, Grid, TextField, Typography } from '@mui/material';
+import { Container, Typography, TextField, Button, Alert } from '@mui/material';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import loginPic from '../../../Asset/images/undraw_programming_re_kg9v.svg';
-import useAuth from '../../../hooks/useAuth';
+import { Grid } from '@mui/material';
+import login from '../../../Asset/images/undraw_programming_re_kg9v.svg'
+import { NavLink, useLocation, useHistory } from 'react-router-dom';
+import useAuth from './../../../hooks/useAuth';
 
 const Login = () => {
     const [loginData, setLoginData] = useState({});
-    const { user, login, error } = useAuth();
+    const { user, loginUser, authError } = useAuth();
 
-    const handleOnBlur = e => {
+    const location = useLocation();
+    const history = useHistory();
+
+    const handleOnChange = e => {
         const field = e.target.name;
         const value = e.target.value;
         const newLoginData = { ...loginData };
         newLoginData[field] = value;
         setLoginData(newLoginData);
-    };
-
-    const handleOnSubmit = e => {
-        login(loginData.email, loginData.password);
+    }
+    const handleLoginSubmit = e => {
+        loginUser(loginData.email, loginData.password, location, history);
         e.preventDefault();
-    };
+    }
 
     return (
         <Container sx={{ mt: 5 }}>
             <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                 <Grid item xs={12} md={6}>
-                    <img src={loginPic} alt="illustration" style={{ width: "90%" }} />
+                    <img src={login} alt="illustration" style={{ width: "90%" }} />
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <Typography variant="h4" sx={{ mb: 5 }}>
                         Login
                     </Typography>
-                    <form action="" onSubmit={handleOnSubmit}>
+                    <form action="" onSubmit={handleLoginSubmit}>
                         <div>
                             <TextField
                                 id="email"
@@ -40,7 +43,7 @@ const Login = () => {
                                 sx={{ width: "85%" }}
                                 type="email"
                                 name="email"
-                                onBlur={handleOnBlur}
+                                onBlur={handleOnChange}
                             />
                             <TextField
                                 id="password"
@@ -49,19 +52,18 @@ const Login = () => {
                                 sx={{ width: "85%", mt: 3 }}
                                 type="password"
                                 name="password"
-                                onBlur={handleOnBlur}
+                                onBlur={handleOnChange}
                             />
                             <Typography variant="caption" display="block" gutterBottom sx={{ mb: 2, textAlign: 'right', mr: 5 }}>
-                                <Link to="/login">Forgot password?</Link>
+                                <NavLink to="/login">Forgot password?</NavLink>
                             </Typography>
                         </div>
-                        {user?.email && <Alert severity="success">Login Successfully</Alert>}
-                        {error && <Alert severity="error">{error}</Alert>}
+                        {/* {user?.email && <Alert severity="success">Login Successfully</Alert>} */}
+                        {authError && <Alert severity="Error">{authError}</Alert>}
                         <Button variant="contained" type="submit">Login</Button>
-
                     </form>
                     <Typography variant="caption" display="block" gutterBottom sx={{ mt: 1, textAlign: 'center' }}>
-                        New User?<Link to="/registration">Register</Link>
+                        New User?<NavLink to="/registration">Register</NavLink>
                     </Typography>
                 </Grid>
             </Grid>
