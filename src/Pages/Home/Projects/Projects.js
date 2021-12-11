@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import useAuth from '../../../hooks/useAuth';
+import useUserDetails from '../../../hooks/useUserDetails';
 import Project from '../Project/Project';
 const Projects = () => {
     const [projects, setProjects] = useState([]);
-    const { userDetail } = useAuth();
-    console.log('user detail', userDetail.id);
-    const test = `http://localhost:5000/projects/${userDetail.id}`;
-    console.log('test', test);
-
+    const { userDetail } = useUserDetails();
+    console.log('useDetails from project', userDetail);
     useEffect(() => {
-        fetch(`http://localhost:5000/projects/${userDetail.id}`)
-            .then(res => res.json())
-            .then(data => setProjects(data))
-    }, [userDetail.id]);
-
+        async function fetchProjects() {
+            let res = await fetch(`http://localhost:5000/projects/${userDetail.id}`);
+            let data = await res.json();
+            setProjects(data);
+        }
+        fetchProjects();
+    }, [userDetail]);
+    console.log('projects---', projects);
     return (
         <div sx={{ mt: 5 }}>
             {
