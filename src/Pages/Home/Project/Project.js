@@ -4,7 +4,9 @@ import Grid from "@mui/material/Grid";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
 
-export default function Project() {
+export default function Project(props) {
+  const project = props.project;
+
   return (
     <Box sx={{ border: 1, p: 2, mb: 1, borderRadius: "16px" }}>
       <Grid container>
@@ -17,8 +19,8 @@ export default function Project() {
               alignItems: "flex-start"
             }}
           >
-            <h2>Hostel Management System</h2>
-            <p>a very good project. we will... see more</p>
+            <h2>{project.tittle}</h2>
+            <p>{project.description}</p>
           </Box>
 
           <Box
@@ -29,8 +31,9 @@ export default function Project() {
               justifyContent: "space-between"
             }}
           >
-            <h4>Done</h4>
-            <h4>19/11/2021</h4>
+            <h4>Status: {project.status}</h4>
+            <h4>Date: {project.date}</h4>
+            <h4>Language: {project.language}</h4>
           </Box>
         </Grid>
         <Grid item xs={1}>

@@ -1,6 +1,7 @@
 import initializeFirebase from "../Pages/Login/Login/Firebase/firebase.init";
 import { useState, useEffect } from 'react';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, updateProfile, getIdToken, signOut } from "firebase/auth";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 
 // initialize firebase app
@@ -8,10 +9,12 @@ initializeFirebase();
 
 const useFirebase = () => {
     const [user, setUser] = useState({});
+    const [userDetail, setUserDetail] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const [authError, setAuthError] = useState('');
-    const [admin, setAdmin] = useState(false);
+    // const [admin, setAdmin] = useState(false);
     const [token, setToken] = useState('');
+    const history = useHistory();
 
     const auth = getAuth();
 
@@ -77,13 +80,14 @@ const useFirebase = () => {
     useEffect(() => {
         fetch(`http://localhost:5000/users/${user.email}`)
             .then(res => res.json())
-            .then(data => setAdmin(data.admin))
+            .then(data => setUserDetail(data));
     }, [user.email])
 
     const logout = () => {
         setIsLoading(true);
         signOut(auth).then(() => {
             // Sign-out successful.
+            history.replace('/login');
         }).catch((error) => {
             // An error happened.
         })
@@ -138,13 +142,13 @@ const useFirebase = () => {
 
     return {
         user,
-        admin,
         token,
         isLoading,
         authError,
         registerUser,
         loginUser,
-        logout
+        logout,
+        userDetail
     }
 }
 
