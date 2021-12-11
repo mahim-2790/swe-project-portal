@@ -1,4 +1,4 @@
-import { Container, Typography, TextField, Button, FormControlLabel, Radio, FormLabel, RadioGroup, FormControl } from '@mui/material';
+import { Container, Typography, TextField, Button, FormControlLabel, Radio, FormLabel, RadioGroup, FormControl, Alert } from '@mui/material';
 import React, { useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import useAuth from './../../../hooks/useAuth';
@@ -7,7 +7,7 @@ import LandingHeader from '../LandingHeader/LandingHeader';
 const Register = () => {
     const [loginData, setLoginData] = useState({});
     const history = useHistory();
-    const { registerUser, user } = useAuth();
+    const { registerUser, user, authError } = useAuth();
 
     const handleOnBlur = e => {
         const field = e.target.name;
@@ -17,12 +17,11 @@ const Register = () => {
         setLoginData(newLoginData);
     }
     const handleOnSubmit = e => {
-
         if (loginData.password !== loginData.confirmPassword) {
             alert('Your password did not match');
             return
         }
-        registerUser(loginData.email, loginData.password, loginData.name, history);
+        registerUser(loginData.id, loginData.email, loginData.password, loginData.name, loginData.role, history);
         e.preventDefault();
     }
     return (
@@ -100,6 +99,8 @@ const Register = () => {
                 <Typography variant="caption" display="block" gutterBottom sx={{ mt: 1, textAlign: 'center' }}>
                     Already have an account?<NavLink to="/login">Login</NavLink>
                 </Typography>
+                {user?.email && <Alert severity="success">User Created successfully!</Alert>}
+                {authError && <Alert severity="error">{authError}</Alert>}
             </Container >
         </div>
     );

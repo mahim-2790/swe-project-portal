@@ -15,8 +15,7 @@ const useFirebase = () => {
 
     const auth = getAuth();
 
-    const registerUser = (email, password, name, history) => {
-        console.log(email, password, name);
+    const registerUser = (id, email, password, name, role, history) => {
         setIsLoading(true);
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
@@ -24,7 +23,9 @@ const useFirebase = () => {
                 const newUser = { email, displayName: name };
                 setUser(newUser);
                 // save user to the database
-                saveUser(email, name, 'POST');
+                saveUser(id, email, name, role, 'POST');
+                //save to collections as per role
+                saveAsRole(id, name, email, role, 'POST');
                 // send name to firebase after creation
                 updateProfile(auth.currentUser, {
                     displayName: name
@@ -44,8 +45,8 @@ const useFirebase = () => {
         setIsLoading(true);
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                const destination = location?.state?.from || '/';
-                history.replace(destination);
+                // const destination = location?.state?.from || '/';
+                history.replace('/home');
                 setAuthError('');
             })
             .catch((error) => {
@@ -74,7 +75,7 @@ const useFirebase = () => {
     }, [auth])
 
     useEffect(() => {
-        fetch(`https://stark-caverns-04377.herokuapp.com/users/${user.email}`)
+        fetch(`http://localhost:5000/users/${user.email}`)
             .then(res => res.json())
             .then(data => setAdmin(data.admin))
     }, [user.email])
@@ -89,17 +90,51 @@ const useFirebase = () => {
             .finally(() => setIsLoading(false));
     }
 
-    const saveUser = (email, displayName, method) => {
-        const user = { email, displayName };
-        fetch('https://stark-caverns-04377.herokuapp.com/users', {
+    const saveUser = (id, email, displayName, role, method) => {
+        const user = { id, email, displayName, role };
+        fetch('http://localhost:5000/users', {
             method: method,
             headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(user)
         })
-            .then()
+            .then(res => res.json())
+            .then(data => console.log(data))
     }
+
+    const saveAsRole = (id, name, email, role, method) => {
+        if (role === 'teacher') {
+            const newTeacher = { id, name, email, role };
+            saveAsTeacher(newTeacher, method);
+        }
+        else if (role === 'student') {
+            const newStudent = { id, name, email, role };
+            saveAsStudent(newStudent, method);
+        }
+
+    };
+
+    const saveAsTeacher = (newTeacher, method) => {
+        fetch('http://localhost:5000/teachers', {
+            method: method,
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newTeacher)
+        }).then(res => res.json())
+    };
+
+    const saveAsStudent = (newStudent, method) => {
+        fetch('http://localhost:5000/students', {
+            method: method,
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newStudent)
+        }).then(res => res.json())
+
+    };
 
     return {
         user,
