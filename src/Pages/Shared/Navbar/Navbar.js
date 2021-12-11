@@ -201,8 +201,8 @@ export default function Navbar(props) {
           ))}
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
+      <Box component="main" sx={{ flexGrow: 1, p: 5 }}>
+      <DrawerHeader />
         {props.component}
       </Box>
     </Box>
