@@ -23,11 +23,12 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import useAuth from '../../../hooks/useAuth';
+import { NavLink } from "react-router-dom";
 
 
 
 const drawerWidth = 240;
-const settings = ["Profile", "Account", "Logout","tfdrtyd"];
+const settings = ["Profile", "Account", "Logout", "tfdrtyd"];
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create("width", {
@@ -99,16 +100,17 @@ export default function Navbar(props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const {logout} = useAuth();
+  const { logout } = useAuth();
+  const [path, setPath] = React.useState("");
 
   const handleDrawerOpen = () => {
     setOpen(true);
   };
 
   const handleSettingClick = setting => {
-      if (setting === "Logout") {
-          logout();
-      }
+    if (setting === "Logout") {
+      logout();
+    }
   };
 
   const handleDrawerClose = () => {
@@ -121,6 +123,13 @@ export default function Navbar(props) {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleMenuClick = index => {
+    index === 0 ? (setPath("/home"))
+      :
+      index === 1 ? (setPath('/registration')) : (setPath("/login"))
+
   };
   return (
     <Box sx={{ display: "flex", flexGrow: 1 }}>
@@ -166,7 +175,7 @@ export default function Navbar(props) {
           >
             {settings.map((setting) => (
               <MenuItem key={setting}>
-                <Typography textAlign="center" onClick={()=>{handleSettingClick(setting)}}>{setting}</Typography>
+                <Typography textAlign="center" onClick={() => { handleSettingClick(setting) }}>{setting}</Typography>
               </MenuItem>
             ))}
           </Menu>
@@ -183,28 +192,29 @@ export default function Navbar(props) {
           </IconButton>
         </DrawerHeader>
         <Divider />
-
-        <List>
-          {["Home", "Search Project", "Create Project"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index === 0 ? (
-                  <HomeIcon />
-                ) : index === 1 ? (
-                  <SearchIcon />
-                ) : (
-                  <AddCircleOutlineIcon />
-                )}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
+        <NavLink to={path}>
+          <List>
+            {["Home", "Search Project", "Create Project"].map((text, index) => (
+              <ListItem button key={text} onClick={() => handleMenuClick(index)}>
+                <ListItemIcon>
+                  {index === 0 ? (
+                    <HomeIcon />
+                  ) : index === 1 ? (
+                    <SearchIcon />
+                  ) : (
+                    <AddCircleOutlineIcon />
+                  )}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
+            ))}
+          </List>
+        </NavLink>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 5 }}>
-      <DrawerHeader />
+        <DrawerHeader />
         {props.component}
       </Box>
-    </Box>
+    </Box >
   );
 }

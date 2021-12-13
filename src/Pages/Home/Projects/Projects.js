@@ -7,12 +7,13 @@ const Projects = () => {
     console.log('useDetails from project', userDetail);
     useEffect(() => {
         async function fetchProjects() {
-            let res = await fetch(`http://localhost:5000/projects/${userDetail.id}`);
+            let res = await fetch(`http://localhost:5000/projects/${userDetail?.id}`);
             let data = await res.json();
             setProjects(data);
         }
         fetchProjects();
     }, [userDetail]);
+
     console.log('projects---', projects);
     return (
         <div sx={{ mt: 5 }}>
