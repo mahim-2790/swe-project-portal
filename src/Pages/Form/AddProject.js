@@ -1,0 +1,257 @@
+import { Typography, TextField, Button, FormControl } from "@mui/material";
+import React, { useState } from "react";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Select from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import Chip from "@mui/material/Chip";
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250
+    }
+  }
+};
+
+const names = [
+  "C",
+  "C++",
+  "JAVA",
+  "Swing",
+  "HTML",
+  "CSS",
+  "Boostrap",
+  "Python",
+  "JS",
+  "PHP",
+  "React.js",
+  "Node.js",
+  "Vue.js",
+  "Laravel"
+];
+
+function getStyles(name, languageName, theme) {
+  return {
+    fontWeight:
+      languageName.indexOf(name) === -1
+        ? theme.typography.fontWeightRegular
+        : theme.typography.fontWeightMedium
+  };
+}
+
+export default function AddProject() {
+  const [courseCode, setcourseCode] = React.useState("");
+  const [semester, setSemester] = React.useState("");
+  const [section, setSection] = React.useState("");
+  const [languageName, setlanguageName] = React.useState([]);
+
+  const handleChangeCouseCode = (event) => {
+    setcourseCode(event.target.value);
+  };
+  const handleChangeSemeter = (event) => {
+    setSemester(event.target.value);
+  };
+  const handleChangeSection = (event) => {
+    setSection(event.target.value);
+  };
+
+  const handleChangeLanguage = (event) => {
+    const {
+      target: { value }
+    } = event;
+    setlanguageName(
+      // On autofill we get a the stringified value.
+      typeof value === "string" ? value.split(",") : value
+    );
+  };
+  return (
+    <Box>
+      <form>
+        <Typography
+          sx={{ textAlign: "left", fontWeight: "bold", color: "#707070" }}
+        >
+          Course Details
+        </Typography>
+        <Box sx={{ my: 1, p: 2, borderRadius: "15px", bgcolor: "#F2F8FE" }}>
+          <Grid container spacing={1}>
+            <Grid item xs={12} sm={6}>
+              <FormControl sx={{ minWidth: "100%" }}>
+                <InputLabel id="course-code">Course Code</InputLabel>
+                <Select
+                  labelId="course-code"
+                  id="course-code"
+                  value={courseCode}
+                  label="Course Code"
+                  onChange={handleChangeCouseCode}
+                >
+                  <MenuItem value="SE223">SE223</MenuItem>
+                  <MenuItem value="SE332">SE332</MenuItem>
+                  <MenuItem value={30}>SE421</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={0} sm={6}></Grid>
+            <Grid item xs={6} sx={{ mt: 1.5 }}>
+              <FormControl sx={{ minWidth: "100%" }}>
+                <InputLabel id="course-code">Semester</InputLabel>
+                <Select
+                  labelId="semester"
+                  id="semester"
+                  value={semester}
+                  label="Course Code"
+                  onChange={handleChangeSemeter}
+                >
+                  <MenuItem value="3">Thirth</MenuItem>
+                  <MenuItem value="5">Fifth</MenuItem>
+                  <MenuItem value="10">Ten</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={6} sx={{ mt: 1.5 }}>
+              <FormControl sx={{ minWidth: "100%" }}>
+                <InputLabel id="course-code">Section</InputLabel>
+                <Select
+                  labelId="section"
+                  id="section"
+                  value={section}
+                  label="Section"
+                  onChange={handleChangeSection}
+                >
+                  <MenuItem value="A">A</MenuItem>
+                  <MenuItem value="B">B</MenuItem>
+                  <MenuItem value="C">C</MenuItem>
+                  <MenuItem value="D">D</MenuItem>
+                  <MenuItem value="E">E</MenuItem>
+                  <MenuItem value="F">F</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+          </Grid>
+        </Box>
+        <Typography
+          sx={{ textAlign: "left", fontWeight: "bold", color: "#707070" }}
+        >
+          Project Details
+        </Typography>
+        <Box sx={{ my: 1, p: 2, borderRadius: "15px", bgcolor: "#F2F8FE" }}>
+          <Grid container spacing={2}>
+            <Grid item xs={8}>
+              <TextField
+                id="tittle"
+                name="tittle"
+                label="Tittle"
+                variant="outlined"
+                sx={{ width: "100%", mt: 2 }}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <FormControl sx={{ width: "100%", mt: 2 }}>
+                <InputLabel id="language-label">Language</InputLabel>
+                <Select
+                  labelId="language-label"
+                  id="language"
+                  multiple
+                  value={languageName}
+                  onChange={handleChangeLanguage}
+                  input={
+                    <OutlinedInput id="select-multiple-chip" label="Chip" />
+                  }
+                  renderValue={(selected) => (
+                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                      {selected.map((value) => (
+                        <Chip key={value} label={value} />
+                      ))}
+                    </Box>
+                  )}
+                  MenuProps={MenuProps}
+                >
+                  {names.map((name) => (
+                    <MenuItem key={name} value={name}>
+                      {name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+          </Grid>
+          <br />
+          <TextField
+            id="description"
+            name="description"
+            label="Description"
+            variant="outlined"
+            multiline
+            maxRows={10}
+            rows={3}
+            sx={{ width: "100%", mt: 2 }}
+          />
+          <br />
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={6}>
+              <TextField
+                id="functional-requirement"
+                name="functional-requirement"
+                label="Functional Requirement"
+                variant="outlined"
+                multiline
+                maxRows={10}
+                rows={5}
+                sx={{ width: "100%", mt: 2 }}
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextField
+                id="non-functional-requirement"
+                name="non-functional-requirement"
+                label="Non Functional Requirement"
+                variant="outlined"
+                multiline
+                maxRows={10}
+                rows={5}
+                sx={{ width: "100%", mt: 2 }}
+              />
+            </Grid>
+          </Grid>
+          <TextField
+            id="github-link"
+            name="github-link"
+            label="Github Link"
+            variant="outlined"
+            sx={{ width: "100%", mt: 2 }}
+          />
+          <TextField
+            id="drive-link"
+            name="drive-link"
+            label="Drive Link"
+            variant="outlined"
+            sx={{ width: "100%", mt: 2 }}
+          />
+          <TextField
+            id="upcoming-feature"
+            name="upcoming-feature"
+            label="Upcoming Feature"
+            variant="outlined"
+            multiline
+            maxRows={10}
+            rows={3}
+            sx={{ width: "100%", mt: 2 }}
+          />
+
+          <Button
+            variant="contained"
+            type="submit"
+            sx={{ mt: 3, px: 9, bgcolor: "#0EA5E9" }}
+          >
+            submit
+          </Button>
+        </Box>
+      </form>
+    </Box>
+  );
+}
