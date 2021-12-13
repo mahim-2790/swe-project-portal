@@ -36,29 +36,33 @@ const names = [
   "Laravel"
 ];
 
-function getStyles(name, languageName, theme) {
-  return {
-    fontWeight:
-      languageName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium
-  };
-}
+// function getStyles(name, languageName, theme) {
+//   return {
+//     fontWeight:
+//       languageName.indexOf(name) === -1
+//         ? theme.typography.fontWeightRegular
+//         : theme.typography.fontWeightMedium
+//   };
+// }
 
 export default function AddProject() {
-  const [courseCode, setcourseCode] = React.useState("");
-  const [semester, setSemester] = React.useState("");
-  const [section, setSection] = React.useState("");
-  const [languageName, setlanguageName] = React.useState([]);
+  const [courseCode, setcourseCode] = useState("");
+  const [teacherInitial, setTeacherInitial] = useState("");
+  const [section, setSection] = useState("");
+  const [languageName, setlanguageName] = useState([]);
+  const [projectDetails, setProjectDetails] = useState({});
 
   const handleChangeCouseCode = (event) => {
     setcourseCode(event.target.value);
+    assignValue(event.target.name, event.target.value);
   };
-  const handleChangeSemeter = (event) => {
-    setSemester(event.target.value);
+  const handleChangeTeacherInitial = (event) => {
+    setTeacherInitial(event.target.value);
+    assignValue(event.target.name, event.target.value);
   };
   const handleChangeSection = (event) => {
     setSection(event.target.value);
+    assignValue(event.target.name, event.target.value);
   };
 
   const handleChangeLanguage = (event) => {
@@ -69,10 +73,30 @@ export default function AddProject() {
       // On autofill we get a the stringified value.
       typeof value === "string" ? value.split(",") : value
     );
+    assignValue(event.target.name, typeof value === "string" ? value.split(",") : value);
   };
+
+  const handleOnChange = e => {
+    const field = e.target.name;
+    const value = e.target.value;
+    assignValue(field, value);
+  }
+
+  const assignValue = (field, value) => {
+    const newValue = { ...projectDetails };
+    newValue[field] = value;
+    setProjectDetails(newValue);
+  };
+
+  const handleOnSubmit = e => {
+    console.log('project details from submit---', projectDetails);
+
+    e.preventDefault();
+  };
+
   return (
     <Box>
-      <form>
+      <form onSubmit={handleOnSubmit}>
         <Typography
           sx={{ textAlign: "left", fontWeight: "bold", color: "#707070" }}
         >
@@ -85,7 +109,8 @@ export default function AddProject() {
                 <InputLabel id="course-code">Course Code</InputLabel>
                 <Select
                   labelId="course-code"
-                  id="course-code"
+                  id="courseCode"
+                  name="courseCode"
                   value={courseCode}
                   label="Course Code"
                   onChange={handleChangeCouseCode}
@@ -99,17 +124,18 @@ export default function AddProject() {
             <Grid item xs={0} sm={6}></Grid>
             <Grid item xs={6} sx={{ mt: 1.5 }}>
               <FormControl sx={{ minWidth: "100%" }}>
-                <InputLabel id="course-code">Semester</InputLabel>
+                <InputLabel id="course-code">Teacher Initial</InputLabel>
                 <Select
-                  labelId="semester"
-                  id="semester"
-                  value={semester}
-                  label="Course Code"
-                  onChange={handleChangeSemeter}
+                  labelId="teacherInitial"
+                  id="teacherInitial"
+                  name="teacherInitial"
+                  value={teacherInitial}
+                  label="Teacher Initial"
+                  onChange={handleChangeTeacherInitial}
                 >
-                  <MenuItem value="3">Thirth</MenuItem>
-                  <MenuItem value="5">Fifth</MenuItem>
-                  <MenuItem value="10">Ten</MenuItem>
+                  <MenuItem value="msa">MSA</MenuItem>
+                  <MenuItem value="ssh">SsH</MenuItem>
+                  <MenuItem value="mr">MR</MenuItem>
                 </Select>
               </FormControl>
             </Grid>
@@ -119,6 +145,7 @@ export default function AddProject() {
                 <Select
                   labelId="section"
                   id="section"
+                  name="section"
                   value={section}
                   label="Section"
                   onChange={handleChangeSection}
@@ -148,6 +175,7 @@ export default function AddProject() {
                 label="Tittle"
                 variant="outlined"
                 sx={{ width: "100%", mt: 2 }}
+                onBlur={handleOnChange}
               />
             </Grid>
             <Grid item xs={4}>
@@ -156,6 +184,7 @@ export default function AddProject() {
                 <Select
                   labelId="language-label"
                   id="language"
+                  name="language"
                   multiple
                   value={languageName}
                   onChange={handleChangeLanguage}
@@ -189,6 +218,7 @@ export default function AddProject() {
             multiline
             maxRows={10}
             rows={3}
+            onBlur={handleOnChange}
             sx={{ width: "100%", mt: 2 }}
           />
           <br />
@@ -196,51 +226,56 @@ export default function AddProject() {
             <Grid item xs={12} md={6}>
               <TextField
                 id="functional-requirement"
-                name="functional-requirement"
+                name="functionalRequirement"
                 label="Functional Requirement"
                 variant="outlined"
                 multiline
                 maxRows={10}
                 rows={5}
                 sx={{ width: "100%", mt: 2 }}
+                onBlur={handleOnChange}
               />
             </Grid>
             <Grid item xs={12} md={6}>
               <TextField
                 id="non-functional-requirement"
-                name="non-functional-requirement"
+                name="nonFunctionalRequirement"
                 label="Non Functional Requirement"
                 variant="outlined"
                 multiline
                 maxRows={10}
                 rows={5}
                 sx={{ width: "100%", mt: 2 }}
+                onBlur={handleOnChange}
               />
             </Grid>
           </Grid>
           <TextField
             id="github-link"
-            name="github-link"
+            name="githubLink"
             label="Github Link"
             variant="outlined"
             sx={{ width: "100%", mt: 2 }}
+            onBlur={handleOnChange}
           />
           <TextField
             id="drive-link"
-            name="drive-link"
+            name="driveLink"
             label="Drive Link"
             variant="outlined"
             sx={{ width: "100%", mt: 2 }}
+            onBlur={handleOnChange}
           />
           <TextField
             id="upcoming-feature"
-            name="upcoming-feature"
+            name="upcomingFeature"
             label="Upcoming Feature"
             variant="outlined"
             multiline
             maxRows={10}
             rows={3}
             sx={{ width: "100%", mt: 2 }}
+            onBlur={handleOnChange}
           />
 
           <Button
@@ -248,7 +283,7 @@ export default function AddProject() {
             type="submit"
             sx={{ mt: 3, px: 9, bgcolor: "#0EA5E9" }}
           >
-            submit
+            Submit
           </Button>
         </Box>
       </form>
