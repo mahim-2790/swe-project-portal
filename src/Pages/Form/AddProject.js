@@ -7,7 +7,6 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Chip from "@mui/material/Chip";
-import useAuth from "../../hooks/useAuth";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -47,15 +46,27 @@ const names = [
 // }
 
 export default function AddProject() {
+  // const { userDetail } = useAuth();
+  const creationDate = new Date().toLocaleDateString();
+  const id = sessionStorage.getItem('userId');
+  const initialObj = {
+    student_id: id,
+    date: creationDate,
+    status: 'pending'
+  };
   const [courseCode, setcourseCode] = useState("");
   const [teacherInitial, setTeacherInitial] = useState("");
   const [section, setSection] = useState("");
   const [languageName, setlanguageName] = useState([]);
-  const { userDetail } = useAuth();
-  const id = userDetail.id;
+  const [projectFound, setProjectFound] = useState(false);
 
 
-  const initialObj = { studentId: id };
+
+  console.log(id);
+
+
+  console.log(initialObj);
+
 
   const [projectDetails, setProjectDetails] = useState(initialObj);
 
@@ -96,22 +107,52 @@ export default function AddProject() {
     setProjectDetails(newValue);
   };
 
-  const handleOnSubmit = e => {
-    console.log(projectDetails);
+  // useEffect(() => {
+  //   async function fetchUserDetail() {
+  //     let res = await fetch(`http://localhost:5000/projects/${projectDetails.title}`);
+  //     let data = await res.json();
+  //     console.log(data);
 
-    // pushProject();
+  //     data ? setProjectFound(true) : setProjectFound(false);
+  //   }
+  //   fetchUserDetail();
+  // }, [projectDetails?.title]);
+
+  const handleOnSubmit = e => {
+
+
+    if (projectFound) {
+      alert('Project with this tittle already exist!');
+    }
+
+
+    const inserted = pushProject();
+    if (inserted) {
+      setProjectDetails(initialObj);
+      alert('Project is successfully created.')
+    }
     e.preventDefault();
   };
 
   const pushProject = () => {
+    let insertion = false;
     fetch('http://localhost:5000/projects', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
       },
       body: JSON.stringify(projectDetails)
-    }).then(res => res.json())
-  }
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.insertedId) {
+          insertion = true;
+        }
+      })
+    return insertion;
+  };
+
+
 
 
 

@@ -14,7 +14,6 @@ const Projects = () => {
         fetchProjects();
     }, [userDetail]);
 
-    console.log('projects---', projects);
     return (
         <div sx={{ mt: 5 }}>
             {

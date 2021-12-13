@@ -23,7 +23,7 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import useAuth from '../../../hooks/useAuth';
-import { NavLink } from "react-router-dom";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 
 
@@ -101,7 +101,7 @@ export default function Navbar(props) {
   const [open, setOpen] = React.useState(false);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const { logout } = useAuth();
-  const [path, setPath] = React.useState("");
+  const history = useHistory();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -126,9 +126,9 @@ export default function Navbar(props) {
   };
 
   const handleMenuClick = index => {
-    index === 0 ? (setPath("/home"))
+    index === 0 ? (history.push('/home'))
       :
-      index === 1 ? (setPath('/registration')) : (setPath("/login"))
+      index === 1 ? (history.push('/home')) : (history.push('/createProject'))
 
   };
   return (
@@ -192,24 +192,24 @@ export default function Navbar(props) {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <NavLink to={path}>
-          <List>
-            {["Home", "Search Project", "Create Project"].map((text, index) => (
-              <ListItem button key={text} onClick={() => handleMenuClick(index)}>
-                <ListItemIcon>
-                  {index === 0 ? (
-                    <HomeIcon />
-                  ) : index === 1 ? (
-                    <SearchIcon />
-                  ) : (
-                    <AddCircleOutlineIcon />
-                  )}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
-        </NavLink>
+
+        <List>
+          {["Home", "Search Project", "Create Project"].map((text, index) => (
+            <ListItem button key={text} onClick={() => handleMenuClick(index)}>
+              <ListItemIcon>
+                {index === 0 ? (
+                  <HomeIcon />
+                ) : index === 1 ? (
+                  <SearchIcon />
+                ) : (
+                  <AddCircleOutlineIcon />
+                )}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
+        </List>
+
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 5 }}>
         <DrawerHeader />
