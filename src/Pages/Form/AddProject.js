@@ -7,6 +7,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Chip from "@mui/material/Chip";
+import useAuth from "../../hooks/useAuth";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -50,7 +51,14 @@ export default function AddProject() {
   const [teacherInitial, setTeacherInitial] = useState("");
   const [section, setSection] = useState("");
   const [languageName, setlanguageName] = useState([]);
-  const [projectDetails, setProjectDetails] = useState({});
+  const { userDetail } = useAuth();
+  const id = userDetail.id;
+
+
+  const initialObj = { studentId: id };
+
+  const [projectDetails, setProjectDetails] = useState(initialObj);
+
 
   const handleChangeCouseCode = (event) => {
     setcourseCode(event.target.value);
@@ -89,10 +97,23 @@ export default function AddProject() {
   };
 
   const handleOnSubmit = e => {
-    console.log('project details from submit---', projectDetails);
+    console.log(projectDetails);
 
+    // pushProject();
     e.preventDefault();
   };
+
+  const pushProject = () => {
+    fetch('http://localhost:5000/projects', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(projectDetails)
+    }).then(res => res.json())
+  }
+
+
 
   return (
     <Box>
@@ -105,7 +126,7 @@ export default function AddProject() {
         <Box sx={{ my: 1, p: 2, borderRadius: "15px", bgcolor: "#F2F8FE" }}>
           <Grid container spacing={1}>
             <Grid item xs={12} sm={6}>
-              <FormControl sx={{ minWidth: "100%" }}>
+              <FormControl required sx={{ minWidth: "100%" }}>
                 <InputLabel id="course-code">Course Code</InputLabel>
                 <Select
                   labelId="course-code"
@@ -114,6 +135,7 @@ export default function AddProject() {
                   value={courseCode}
                   label="Course Code"
                   onChange={handleChangeCouseCode}
+                  required
                 >
                   <MenuItem value="SE223">SE223</MenuItem>
                   <MenuItem value="SE332">SE332</MenuItem>
@@ -123,7 +145,7 @@ export default function AddProject() {
             </Grid>
             <Grid item xs={0} sm={6}></Grid>
             <Grid item xs={6} sx={{ mt: 1.5 }}>
-              <FormControl sx={{ minWidth: "100%" }}>
+              <FormControl required sx={{ minWidth: "100%" }}>
                 <InputLabel id="course-code">Teacher Initial</InputLabel>
                 <Select
                   labelId="teacherInitial"
@@ -132,6 +154,7 @@ export default function AddProject() {
                   value={teacherInitial}
                   label="Teacher Initial"
                   onChange={handleChangeTeacherInitial}
+                  required
                 >
                   <MenuItem value="msa">MSA</MenuItem>
                   <MenuItem value="ssh">SsH</MenuItem>
@@ -140,7 +163,7 @@ export default function AddProject() {
               </FormControl>
             </Grid>
             <Grid item xs={6} sx={{ mt: 1.5 }}>
-              <FormControl sx={{ minWidth: "100%" }}>
+              <FormControl required sx={{ minWidth: "100%" }}>
                 <InputLabel id="course-code">Section</InputLabel>
                 <Select
                   labelId="section"
@@ -149,6 +172,7 @@ export default function AddProject() {
                   value={section}
                   label="Section"
                   onChange={handleChangeSection}
+                  required
                 >
                   <MenuItem value="A">A</MenuItem>
                   <MenuItem value="B">B</MenuItem>
@@ -176,10 +200,11 @@ export default function AddProject() {
                 variant="outlined"
                 sx={{ width: "100%", mt: 2 }}
                 onBlur={handleOnChange}
+                required
               />
             </Grid>
             <Grid item xs={4}>
-              <FormControl sx={{ width: "100%", mt: 2 }}>
+              <FormControl required sx={{ width: "100%", mt: 2 }}>
                 <InputLabel id="language-label">Language</InputLabel>
                 <Select
                   labelId="language-label"
@@ -188,6 +213,7 @@ export default function AddProject() {
                   multiple
                   value={languageName}
                   onChange={handleChangeLanguage}
+                  required
                   input={
                     <OutlinedInput id="select-multiple-chip" label="Chip" />
                   }
@@ -220,6 +246,7 @@ export default function AddProject() {
             rows={3}
             onBlur={handleOnChange}
             sx={{ width: "100%", mt: 2 }}
+            required
           />
           <br />
           <Grid container spacing={2}>
@@ -234,6 +261,7 @@ export default function AddProject() {
                 rows={5}
                 sx={{ width: "100%", mt: 2 }}
                 onBlur={handleOnChange}
+                required
               />
             </Grid>
             <Grid item xs={12} md={6}>
@@ -247,6 +275,7 @@ export default function AddProject() {
                 rows={5}
                 sx={{ width: "100%", mt: 2 }}
                 onBlur={handleOnChange}
+                required
               />
             </Grid>
           </Grid>
@@ -257,6 +286,7 @@ export default function AddProject() {
             variant="outlined"
             sx={{ width: "100%", mt: 2 }}
             onBlur={handleOnChange}
+            required
           />
           <TextField
             id="drive-link"
@@ -265,6 +295,7 @@ export default function AddProject() {
             variant="outlined"
             sx={{ width: "100%", mt: 2 }}
             onBlur={handleOnChange}
+            required
           />
           <TextField
             id="upcoming-feature"
@@ -276,6 +307,7 @@ export default function AddProject() {
             rows={3}
             sx={{ width: "100%", mt: 2 }}
             onBlur={handleOnChange}
+            required
           />
 
           <Button

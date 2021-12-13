@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import useUserDetails from '../../../hooks/useUserDetails';
+import useAuth from '../../../hooks/useAuth';
 import Project from '../Project/Project';
 const Projects = () => {
     const [projects, setProjects] = useState([]);
-    const { userDetail } = useUserDetails();
+    const { userDetail } = useAuth()
     console.log('useDetails from project', userDetail);
     useEffect(() => {
         async function fetchProjects() {
