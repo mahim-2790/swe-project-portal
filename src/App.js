@@ -2,7 +2,11 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import AuthProvider from './contexts/AuthProvider/AuthProvider';
+<<<<<<< HEAD
 import AddProject from './Pages/Form/AddProject';
+=======
+import UserDetailProvider from './contexts/UserDetailProvider/UserDetailProvider';
+>>>>>>> 39bae3e12603492826b188482876aea594a0fd80
 import Home from './Pages/Home/Home/Home';
 import LandingPage from './Pages/Login/LandingPage/LandingPage';
 import Register from './Pages/Login/Register/Register';
@@ -12,6 +16,7 @@ function App() {
   return (
     <div className="App">
       <AuthProvider>
+<<<<<<< HEAD
         <Router>
           <Switch>
             <Route path="/registration">
@@ -28,6 +33,23 @@ function App() {
             </Route>
           </Switch>
         </Router>
+=======
+        <UserDetailProvider>
+          <Router>
+            <Switch>
+              <Route path="/registration">
+                <Register></Register>
+              </Route>
+              <Route path="/login">
+                <LandingPage></LandingPage>
+              </Route>
+              <Route path="/home">
+                <Home></Home>
+              </Route>
+            </Switch>
+          </Router>
+        </UserDetailProvider>
+>>>>>>> 39bae3e12603492826b188482876aea594a0fd80
       </AuthProvider>
     </div>
   );
