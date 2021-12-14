@@ -109,7 +109,7 @@ export default function Navbar(props) {
 
   const handleSettingClick = setting => {
     if (setting === "Logout") {
-      logout();
+      logout(history);
     }
   };
 

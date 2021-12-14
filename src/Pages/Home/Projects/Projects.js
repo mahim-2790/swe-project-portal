@@ -10,6 +10,7 @@ const Projects = () => {
             let res = await fetch(`http://localhost:5000/projects/${userDetail?.id}`);
             let data = await res.json();
             setProjects(data);
+            sessionStorage.setItem('userId', userDetail?.id);
         }
         fetchProjects();
     }, [userDetail]);

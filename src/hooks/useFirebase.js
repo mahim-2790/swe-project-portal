@@ -78,12 +78,16 @@ const useFirebase = () => {
 
 
 
-    const logout = () => {
+    const logout = (history) => {
         setIsLoading(true);
         signOut(auth).then(() => {
             // Sign-out successful.
+            history.push('/login');
+            sessionStorage.clear();
         }).catch((error) => {
             // An error happened.
+            console.log(error);
+
         })
             .finally(() => setIsLoading(false));
     }
@@ -139,8 +143,6 @@ const useFirebase = () => {
             let res = await fetch(`http://localhost:5000/users/${user.email}`);
             let data = await res.json();
             setUserDetail(data);
-            sessionStorage.setItem('userId', userDetail?.id);
-            sessionStorage.setItem('userDetail', data);
         }
         fetchUserDetail();
     }, [user.email]);

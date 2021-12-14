@@ -1,5 +1,5 @@
 import { Typography, TextField, Button, FormControl } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Select from "@mui/material/Select";
@@ -7,6 +7,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Chip from "@mui/material/Chip";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -58,14 +59,10 @@ export default function AddProject() {
   const [teacherInitial, setTeacherInitial] = useState("");
   const [section, setSection] = useState("");
   const [languageName, setlanguageName] = useState([]);
-  const [projectFound, setProjectFound] = useState(false);
+  const [insertionStatus, setInsertationStatus] = useState({});
+  const history = useHistory();
 
 
-
-  console.log(id);
-
-
-  console.log(initialObj);
 
 
   const [projectDetails, setProjectDetails] = useState(initialObj);
@@ -107,35 +104,24 @@ export default function AddProject() {
     setProjectDetails(newValue);
   };
 
-  // useEffect(() => {
-  //   async function fetchUserDetail() {
-  //     let res = await fetch(`http://localhost:5000/projects/${projectDetails.title}`);
-  //     let data = await res.json();
-  //     console.log(data);
-
-  //     data ? setProjectFound(true) : setProjectFound(false);
-  //   }
-  //   fetchUserDetail();
-  // }, [projectDetails?.title]);
-
   const handleOnSubmit = e => {
-
-
-    if (projectFound) {
-      alert('Project with this tittle already exist!');
+    if (id) {
+      pushProject();
+      if (insertionStatus) {
+        setProjectDetails(initialObj);
+        alert(`Project is successfully created with.`);
+        history.push('/home');
+      } else {
+        alert('something went wrong');
+      }
+    } else {
+      alert('Session Out Please Login Again');
     }
 
-
-    const inserted = pushProject();
-    if (inserted) {
-      setProjectDetails(initialObj);
-      alert('Project is successfully created.')
-    }
     e.preventDefault();
   };
 
   const pushProject = () => {
-    let insertion = false;
     fetch('http://localhost:5000/projects', {
       method: 'POST',
       headers: {
@@ -144,16 +130,15 @@ export default function AddProject() {
       body: JSON.stringify(projectDetails)
     })
       .then(res => res.json())
-      .then(data => {
-        if (data.insertedId) {
-          insertion = true;
-        }
-      })
-    return insertion;
+      .then(data => setInsertationStatus(data))
   };
 
 
-
+  useEffect(() => {
+    fetch(`http://localhost:5000/projects/${projectDetails.tittle}`)
+      .then(res => res.json())
+      .then(data => console.log(data))
+  }, [projectDetails])
 
 
   return (
