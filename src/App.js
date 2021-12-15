@@ -6,6 +6,7 @@ import Home from './Pages/Home/Home/Home';
 import LandingPage from './Pages/Login/LandingPage/LandingPage';
 import Register from './Pages/Login/Register/Register';
 import CreateProject from './Pages/Form/CreateProject/CreateProject';
+import EditProject from './Pages/EditProject/EditProject/EditProject';
 
 
 function App() {
@@ -30,6 +31,10 @@ function App() {
 
             <Route path="/createProject">
               <CreateProject></CreateProject>
+            </Route>
+
+            <Route path="/updateProject/:projectId">
+              <EditProject></EditProject>
             </Route>
 
             <Route path="/">

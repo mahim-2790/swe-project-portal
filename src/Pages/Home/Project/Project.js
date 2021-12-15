@@ -5,6 +5,7 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
 import { Typography } from "@mui/material";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { NavLink } from "react-router-dom";
 
 export default function Project(props) {
   const project = props.project;
@@ -72,7 +73,7 @@ export default function Project(props) {
             justifyContent: "center"
           }}
         >
-          <EditIcon />
+          <NavLink to={`/updateProject/${project._id}`}><EditIcon /></NavLink>
         </Grid>
       </Grid>
     </Box>

@@ -11,6 +11,7 @@ const Projects = () => {
             let data = await res.json();
             setProjects(data);
             sessionStorage.setItem('userId', userDetail?.id);
+            sessionStorage.setItem('projects', JSON.stringify(data));
         }
         fetchProjects();
     }, [userDetail]);

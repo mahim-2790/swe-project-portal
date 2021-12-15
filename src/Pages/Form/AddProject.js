@@ -1,5 +1,5 @@
 import { Typography, TextField, Button, FormControl } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Select from "@mui/material/Select";
@@ -120,16 +120,16 @@ export default function AddProject() {
   };
 
 
-  useEffect(() => {
+
+
+  const handleOnSubmit = e => {
+
     fetch(`http://localhost:5000/projects`)
       .then(res => res.json())
       .then(data => setAllProjects(data))
-  }, [projectDetails])
 
-  const filteredProject = allProjects.filter(existingProject => existingProject.tittle === projectDetails.tittle);
-  console.log(filteredProject);
-
-  const handleOnSubmit = e => {
+    const filteredProject = allProjects.filter(existingProject => existingProject.tittle === projectDetails.tittle);
+    console.log(filteredProject);
     if (id) {
       if (filteredProject.length === 0) {
         pushProject();
