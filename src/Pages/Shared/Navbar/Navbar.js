@@ -28,7 +28,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 
 const drawerWidth = 240;
-const settings = ["Profile", "Account", "Logout", "tfdrtyd"];
+const settings = ["Profile", "Account", "Logout"];
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create("width", {
