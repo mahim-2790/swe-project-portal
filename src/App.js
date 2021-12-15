@@ -31,6 +31,10 @@ function App() {
             <Route path="/createProject">
               <CreateProject></CreateProject>
             </Route>
+
+            <Route path="/">
+              <LandingPage></LandingPage>
+            </Route>
           </Switch>
         </Router>
 

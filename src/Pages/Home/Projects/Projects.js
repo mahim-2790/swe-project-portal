@@ -4,7 +4,7 @@ import Project from '../Project/Project';
 const Projects = () => {
     const [projects, setProjects] = useState([]);
     const { userDetail } = useAuth()
-    console.log('useDetails from project', userDetail);
+    // console.log('useDetails from project', userDetail);
     useEffect(() => {
         async function fetchProjects() {
             let res = await fetch(`http://localhost:5000/projects/${userDetail?.id}`);

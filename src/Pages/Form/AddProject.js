@@ -8,6 +8,7 @@ import MenuItem from "@mui/material/MenuItem";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Chip from "@mui/material/Chip";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+// import { Warning } from "@mui/icons-material";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -61,6 +62,7 @@ export default function AddProject() {
   const [languageName, setlanguageName] = useState([]);
   const [insertionStatus, setInsertationStatus] = useState({});
   const history = useHistory();
+  const [allProjects, setAllProjects] = useState([]);
 
 
 
@@ -104,22 +106,6 @@ export default function AddProject() {
     setProjectDetails(newValue);
   };
 
-  const handleOnSubmit = e => {
-    if (id) {
-      pushProject();
-      if (insertionStatus) {
-        setProjectDetails(initialObj);
-        alert(`Project is successfully created with.`);
-        history.push('/home');
-      } else {
-        alert('something went wrong');
-      }
-    } else {
-      alert('Session Out Please Login Again');
-    }
-
-    e.preventDefault();
-  };
 
   const pushProject = () => {
     fetch('http://localhost:5000/projects', {
@@ -135,10 +121,36 @@ export default function AddProject() {
 
 
   useEffect(() => {
-    fetch(`http://localhost:5000/projects/${projectDetails.tittle}`)
+    fetch(`http://localhost:5000/projects`)
       .then(res => res.json())
-      .then(data => console.log(data))
+      .then(data => setAllProjects(data))
   }, [projectDetails])
+
+  const filteredProject = allProjects.filter(existingProject => existingProject.tittle === projectDetails.tittle);
+  console.log(filteredProject);
+
+  const handleOnSubmit = e => {
+    if (id) {
+      if (filteredProject.length === 0) {
+        pushProject();
+        if (insertionStatus) {
+          setProjectDetails(initialObj);
+          alert(`Project is successfully created with.`);
+          history.push('/home');
+        } else {
+          alert('something went wrong');
+        }
+      }
+      else {
+        alert('Tittle with this project already exist');
+      }
+    } else {
+      alert('Session Out Please Login Again');
+    }
+
+    e.preventDefault();
+  };
+
 
 
   return (
