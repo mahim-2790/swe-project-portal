@@ -5,7 +5,7 @@ import React from 'react';
 const SearchProject = (props) => {
     const { project } = props;
     return (
-        <Box sx={{ p: 2, mb: 1, borderRadius: "16px", backgroundColor: "#F2F8FE" }}>
+        <Box sx={{ p: 2, mb: 1, borderRadius: "16px", backgroundColor: "#ebf9e9" }}>
             <Grid container rowSpacing={2}>
                 <Grid item xs={12}>
                     <Typography variant="h6" sx={{ textAlign: "left" }}>
@@ -23,13 +23,13 @@ const SearchProject = (props) => {
                 </Grid>
                 <Grid item xs={12}>
                     <Grid container >
-                        <Grid item xs={3} sx={{ textAlign: "left" }}>
+                        <Grid item xs={6} sm={3} sx={{ textAlign: "left" }}>
                             <p>Status: {project.status}</p>
                         </Grid>
-                        <Grid item xs={4}>
+                        <Grid item xs={6} sm={4}>
                             <p>Date: {project.date}</p>
                         </Grid>
-                        <Grid item xs={5} sx={{ textAlign: "right" }}>
+                        <Grid item xs={12} sm={5} sx={{ textAlign: "right" }}>
                             <Typography sx={{ display: 'flex', flexWrap: 'wrap', alignItems: "center" }}>Language: {project.language.map(lang => <Typography ml={1} p={1} border={1} borderRadius={"15px"} variant="p" key={lang}>{lang}</Typography>)}</Typography>
                         </Grid>
                     </Grid>

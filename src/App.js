@@ -7,12 +7,9 @@ import LandingPage from './Pages/Login/LandingPage/LandingPage';
 import Register from './Pages/Login/Register/Register';
 import CreateProject from './Pages/Form/CreateProject/CreateProject';
 import EditProject from './Pages/EditProject/EditProject/EditProject';
-<<<<<<< HEAD
 import ApproveProjects from './Pages/ApproveProject/ApproveProjects';
 import ApproveProjectPage from './Pages/ApproveProject/ApproveProjectPage';
-=======
 import Search from './Pages/Search/Search/Search';
->>>>>>> faa7c6200aa03cfcd5b763c938c3cce368e0a1c2
 
 
 function App() {
@@ -43,13 +40,11 @@ function App() {
               <EditProject></EditProject>
             </Route>
 
-<<<<<<< HEAD
             <Route path="/approveProject">
               <ApproveProjectPage></ApproveProjectPage>
-=======
+            </Route>
             <Route path="/search">
               <Search></Search>
->>>>>>> faa7c6200aa03cfcd5b763c938c3cce368e0a1c2
             </Route>
 
             <Route path="/">
