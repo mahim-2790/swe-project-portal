@@ -7,6 +7,7 @@ import LandingPage from './Pages/Login/LandingPage/LandingPage';
 import Register from './Pages/Login/Register/Register';
 import CreateProject from './Pages/Form/CreateProject/CreateProject';
 import EditProject from './Pages/EditProject/EditProject/EditProject';
+import Search from './Pages/Search/Search/Search';
 
 
 function App() {
@@ -35,6 +36,10 @@ function App() {
 
             <Route path="/updateProject/:projectId">
               <EditProject></EditProject>
+            </Route>
+
+            <Route path="/search">
+              <Search></Search>
             </Route>
 
             <Route path="/">

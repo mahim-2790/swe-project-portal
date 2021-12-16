@@ -128,7 +128,7 @@ export default function Navbar(props) {
   const handleMenuClick = index => {
     index === 0 ? (history.push('/home'))
       :
-      index === 1 ? (history.push('/home')) : (history.push('/createProject'))
+      index === 1 ? (history.push('/search')) : (history.push('/createProject'))
 
   };
   return (

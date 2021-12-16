@@ -1,6 +1,6 @@
 import { Button, Chip, FormControl, Grid, InputLabel, MenuItem, OutlinedInput, Select, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -32,35 +32,45 @@ const names = [
 
 
 const EditForm = (props) => {
-    const project = props.project;
 
-    console.log(project)
-    console.log(project.language)
-
-
+    const projectId = props.projectId.projectId;
 
     const date = new Date().toLocaleDateString();
 
-
-    const [courseCode, setcourseCode] = useState(project.courseCode);
-    const [teacherInitial, setTeacherInitial] = useState(project.teacherInitial);
-    const [section, setSection] = useState(project.section);
+    const [project, setProject] = useState({});
+    const [courseCode, setcourseCode] = useState("");
+    const [teacherInitial, setTeacherInitial] = useState("");
+    const [section, setSection] = useState('');
     const [languageName, setlanguageName] = useState([]);
-    const [tittle, setTittle] = useState(project.tittle);
-    const [description, setDescription] = useState(project.description);
-    const [functionalRequirement, setFunctionalRequirement] = useState(project.functionalRequirement);
-    const [nonFunctionalRequirement, setNonFunctionalRequirement] = useState(project.nonFunctionalRequirement);
-    const [githubLink, setGithubLink] = useState(project.githubLink);
-    const [driveLink, setDriveLink] = useState(project.driveLink);
-    const [upcomingFeature, setUpcomingFeature] = useState(project.upcomingFeature);
+    const [tittle, setTittle] = useState("");
+    const [description, setDescription] = useState("");
+    const [functionalRequirement, setFunctionalRequirement] = useState("");
+    const [nonFunctionalRequirement, setNonFunctionalRequirement] = useState("");
+    const [githubLink, setGithubLink] = useState("");
+    const [driveLink, setDriveLink] = useState("");
+    const [upcomingFeature, setUpcomingFeature] = useState("");
 
 
+    useEffect(() => {
+        fetch(`http://localhost:5000/project/${projectId}`)
+            .then(res => res.json())
+            .then(data => {
+                setProject(data)
+                setlanguageName(Object.values(data.language));
+                setcourseCode(data.courseCode);
+                setSection(data.section);
+                setTeacherInitial(data.teacherInitial);
+                setTittle(data.tittle);
+                setDescription(data.description);
+                setFunctionalRequirement(data.functionalRequirement);
+                setNonFunctionalRequirement(data.nonFunctionalRequirement);
+                setGithubLink(data.githubLink);
+                setDriveLink(data.driveLink);
+                setUpcomingFeature(data.upcomingFeature);
+            })
+    }, [projectId])
 
 
-
-    const [projectDetails, setProjectDetails] = useState(project);
-
-    // setUpdatedProject(projectDetails);
     const history = useHistory();
 
     const handleChangeCouseCode = (event) => {
@@ -118,25 +128,29 @@ const EditForm = (props) => {
     };
 
     const assignValue = (field, value) => {
-        const newValue = { ...projectDetails };
+        const newValue = { ...project };
         newValue[field] = value;
-        setProjectDetails(newValue);
+        setProject(newValue);
     };
 
 
 
     const updateProject = (obj) => {
-        let ack = 0;
 
-        fetch(`http://localhost:5000/updateProject/${projectDetails._id}`, {
+        fetch(`http://localhost:5000/updateProject/${project._id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(obj)
         }).then(res => res.json())
-            .then(data => ack = data.modifiedCount);
-        return ack;
+            .then(data => {
+                if (data.modifiedCount === 1) {
+                    alert('successfully updated!!');
+                    history.push('/home');
+                }
+
+            });
     }
 
 
@@ -144,18 +158,12 @@ const EditForm = (props) => {
     const handleOnSubmit = e => {
         assignValue('modifiedDate', date);
         const filtered = {};
-        for (const key in projectDetails) {
+        for (const key in project) {
             if (key !== '_id') {
-                filtered[key] = projectDetails[key];
+                filtered[key] = project[key];
             }
         }
-        console.log(filtered);
-
-        const updated = updateProject(filtered);
-        if (updated) {
-            alert('updated');
-            history.push('/home');
-        }
+        updateProject(filtered);
 
         e.preventDefault();
     };
