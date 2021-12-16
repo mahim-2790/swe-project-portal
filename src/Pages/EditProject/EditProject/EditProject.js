@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 // import AddProject from '../../Form/AddProject';
 import Navbar from '../../Shared/Navbar/Navbar';
