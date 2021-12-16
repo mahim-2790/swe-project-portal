@@ -10,6 +10,7 @@ import EditProject from './Pages/EditProject/EditProject/EditProject';
 import ApproveProjects from './Pages/ApproveProject/ApproveProjects';
 import ApproveProjectPage from './Pages/ApproveProject/ApproveProjectPage';
 import Search from './Pages/Search/Search/Search';
+import Profile from './Pages/Profile/Profile';
 
 
 function App() {
@@ -45,6 +46,9 @@ function App() {
             </Route>
             <Route path="/search">
               <Search></Search>
+            </Route>
+            <Route path="/profile">
+              <Profile></Profile>
             </Route>
 
             <Route path="/">
