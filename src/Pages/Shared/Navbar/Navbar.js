@@ -135,7 +135,7 @@ export default function Navbar(props) {
     <Box sx={{ display: "flex", flexGrow: 1 }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
-        <Toolbar>
+        <Toolbar sx={{ bgcolor: "#F2F8FE" }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -146,9 +146,9 @@ export default function Navbar(props) {
               ...(open && { display: "none" })
             }}
           >
-            <MenuIcon />
+            <MenuIcon sx={{ color: "#0EA5E9" }}/>
           </IconButton>
-          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, color:"#707070" }}>
             SWE Project Portal
           </Typography>
           <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

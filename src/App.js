@@ -7,6 +7,8 @@ import LandingPage from './Pages/Login/LandingPage/LandingPage';
 import Register from './Pages/Login/Register/Register';
 import CreateProject from './Pages/Form/CreateProject/CreateProject';
 import EditProject from './Pages/EditProject/EditProject/EditProject';
+import ApproveProjects from './Pages/ApproveProject/ApproveProjects';
+import ApproveProjectPage from './Pages/ApproveProject/ApproveProjectPage';
 
 
 function App() {
@@ -37,9 +39,16 @@ function App() {
               <EditProject></EditProject>
             </Route>
 
+            <Route path="/approveProject">
+              <ApproveProjectPage></ApproveProjectPage>
+            </Route>
+
             <Route path="/">
               <LandingPage></LandingPage>
             </Route>
+
+          
+
           </Switch>
         </Router>
 
