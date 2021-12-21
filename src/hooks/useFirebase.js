@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, updateProfile, getIdToken, signOut } from "firebase/auth";
 
 
+
 // initialize firebase app
 initializeFirebase();
 
@@ -17,7 +18,7 @@ const useFirebase = () => {
 
     const auth = getAuth();
 
-    const registerUser = (id, email, password, name, role, history) => {
+    const registerUser = (id, email, password, name, role, teacherInitial, history) => {
         setIsLoading(true);
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
@@ -27,14 +28,17 @@ const useFirebase = () => {
                 // save user to the database
                 saveUser(id, email, name, role, 'POST');
                 //save to collections as per role
-                saveAsRole(id, name, email, role, 'POST');
+                saveAsRole(id, name, email, role, teacherInitial, 'POST');
                 // send name to firebase after creation
                 updateProfile(auth.currentUser, {
                     displayName: name
                 }).then(() => {
                 }).catch((error) => {
                 });
-                history.replace('/');
+                if (role === 'teacher') {
+                    history.replace('/teacher/home');
+                }
+                else history.replace('/home');
             })
             .catch((error) => {
                 setAuthError(error.message);
@@ -48,7 +52,11 @@ const useFirebase = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // const destination = location?.state?.from || '/';
-                history.replace('/home');
+                if (userDetail.role === 'teacher') {
+                    history.replace('/teacher/home');
+
+                }
+                else history.replace('/home');
                 setAuthError('');
             })
             .catch((error) => {
@@ -84,6 +92,8 @@ const useFirebase = () => {
             // Sign-out successful.
             history.push('/login');
             sessionStorage.clear();
+            setUser({});
+            setUserDetail({});
         }).catch((error) => {
             // An error happened.
             console.log(error);
@@ -105,9 +115,9 @@ const useFirebase = () => {
             .then(data => console.log(data))
     }
 
-    const saveAsRole = (id, name, email, role, method) => {
+    const saveAsRole = (id, name, email, role, teacherInitial, method) => {
         if (role === 'teacher') {
-            const newTeacher = { id, name, email, role };
+            const newTeacher = { id, name, email, role, teacherInitial };
             saveAsTeacher(newTeacher, method);
         }
         else if (role === 'student') {
@@ -143,6 +153,7 @@ const useFirebase = () => {
             let res = await fetch(`http://localhost:5000/users/${user.email}`);
             let data = await res.json();
             setUserDetail(data);
+            // sessionStorage.setItem('user', JSON.stringify(data));
         }
         fetchUserDetail();
     }, [user.email]);

@@ -7,10 +7,9 @@ import LandingPage from './Pages/Login/LandingPage/LandingPage';
 import Register from './Pages/Login/Register/Register';
 import CreateProject from './Pages/Form/CreateProject/CreateProject';
 import EditProject from './Pages/EditProject/EditProject/EditProject';
-import ApproveProjects from './Pages/ApproveProject/ApproveProjects';
-import ApproveProjectPage from './Pages/ApproveProject/ApproveProjectPage';
 import Search from './Pages/Search/Search/Search';
 import Profile from './Pages/Profile/Profile';
+import TeacherHome from './Pages/TeacherHome/TeacherHome';
 
 
 function App() {
@@ -41,9 +40,10 @@ function App() {
               <EditProject></EditProject>
             </Route>
 
-            <Route path="/approveProject">
-              <ApproveProjectPage></ApproveProjectPage>
+            <Route path='/teacher/home'>
+              <TeacherHome></TeacherHome>
             </Route>
+
             <Route path="/search">
               <Search></Search>
             </Route>
@@ -55,7 +55,7 @@ function App() {
               <LandingPage></LandingPage>
             </Route>
 
-          
+
 
           </Switch>
         </Router>

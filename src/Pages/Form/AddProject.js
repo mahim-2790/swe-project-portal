@@ -50,7 +50,8 @@ const names = [
 export default function AddProject() {
   // const { userDetail } = useAuth();
   const creationDate = new Date().toLocaleDateString();
-  const id = sessionStorage.getItem('userId');
+  const user = JSON.parse(sessionStorage.getItem('user'));
+  const id = user.id;
   const initialObj = {
     student_id: id,
     date: creationDate,
@@ -74,10 +75,12 @@ export default function AddProject() {
     setcourseCode(event.target.value);
     assignValue(event.target.name, event.target.value);
   };
+
   const handleChangeTeacherInitial = (event) => {
     setTeacherInitial(event.target.value);
     assignValue(event.target.name, event.target.value);
   };
+
   const handleChangeSection = (event) => {
     setSection(event.target.value);
     assignValue(event.target.name, event.target.value);
@@ -135,7 +138,7 @@ export default function AddProject() {
         pushProject();
         if (insertionStatus) {
           setProjectDetails(initialObj);
-          alert(`Project is successfully created with.`);
+          alert(`Project is successfully created.`);
           history.push('/home');
         } else {
           alert('something went wrong');
@@ -194,9 +197,9 @@ export default function AddProject() {
                   onChange={handleChangeTeacherInitial}
                   required
                 >
-                  <MenuItem value="msa">MSA</MenuItem>
-                  <MenuItem value="ssh">SsH</MenuItem>
-                  <MenuItem value="mr">MR</MenuItem>
+                  <MenuItem value="MSA">MSA</MenuItem>
+                  <MenuItem value="SsH">SsH</MenuItem>
+                  <MenuItem value="MR">MR</MenuItem>
                 </Select>
               </FormControl>
             </Grid>

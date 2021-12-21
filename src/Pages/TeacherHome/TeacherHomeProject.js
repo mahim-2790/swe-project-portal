@@ -1,11 +1,9 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import EditIcon from "@mui/icons-material/Edit";
 import { Typography } from "@mui/material";
 
-export default function ApproveProject(props) {
+export default function TeacherHomeProject(props) {
   const project = props.project;
 
   return (
@@ -17,12 +15,12 @@ export default function ApproveProject(props) {
           </Typography>
         </Grid>
         <Grid item xs={4} >
-           <Typography variant="h6" sx={{ textAlign: "center" }}>
+          <Typography variant="h6" sx={{ textAlign: "center" }}>
             ID: {project.student_id}
           </Typography>
         </Grid>
         <Grid item xs={4}        >
-           <Typography variant="h6" sx={{ textAlign: "right" }}>
+          <Typography variant="h6" sx={{ textAlign: "right" }}>
             Section: {project.section}
           </Typography>
         </Grid>
@@ -39,7 +37,7 @@ export default function ApproveProject(props) {
             <Grid item xs={6} sm={3} sx={{ textAlign: "left" }}>
               <p>Status: {project.status}</p>
             </Grid>
-            <Grid item xs={6} sm={4}  sx={{ textAlign: "center" }}>
+            <Grid item xs={6} sm={4} sx={{ textAlign: "center" }}>
               <p>Date: {project.date}</p>
             </Grid>
             <Grid item xs={12} sm={5}>
