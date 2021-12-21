@@ -111,6 +111,9 @@ export default function Navbar(props) {
     if (setting === "Logout") {
       logout(history);
     }
+    else if (setting === "Profile") {
+      history.push('/profile');
+    }
   };
 
   const handleDrawerClose = () => {
@@ -146,9 +149,9 @@ export default function Navbar(props) {
               ...(open && { display: "none" })
             }}
           >
-            <MenuIcon sx={{ color: "#0EA5E9" }}/>
+            <MenuIcon sx={{ color: "#0EA5E9" }} />
           </IconButton>
-          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, color:"#707070" }}>
+          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, color: "#707070" }}>
             SWE Project Portal
           </Typography>
           <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
