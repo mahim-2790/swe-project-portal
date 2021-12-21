@@ -100,7 +100,7 @@ export default function Navbar(props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const { logout } = useAuth();
+  const { logout, userDetail } = useAuth();
   const history = useHistory();
 
   const handleDrawerOpen = () => {
@@ -129,7 +129,7 @@ export default function Navbar(props) {
   };
 
   const handleMenuClick = index => {
-    index === 0 ? (history.push('/home'))
+    index === 0 ? userDetail.role === 'student' ? (history.push('/home')) : (history.push('/teacher/home'))
       :
       index === 1 ? (history.push('/search')) : (history.push('/createProject'))
 
@@ -196,7 +196,7 @@ export default function Navbar(props) {
         </DrawerHeader>
         <Divider />
 
-        <List>
+        {userDetail.role === 'student' ? <List>
           {["Home", "Search Project", "Create Project"].map((text, index) => (
             <ListItem button key={text} onClick={() => handleMenuClick(index)}>
               <ListItemIcon>
@@ -212,6 +212,22 @@ export default function Navbar(props) {
             </ListItem>
           ))}
         </List>
+          :
+          <List>
+            {["Home", "Search Project"].map((text, index) => (
+              <ListItem button key={text} onClick={() => handleMenuClick(index)}>
+                <ListItemIcon>
+                  {index === 0 ? (
+                    <HomeIcon />
+                  ) :
+                    <SearchIcon />
+                  }
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
+            ))}
+          </List>
+        }
 
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 2 }}>

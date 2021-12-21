@@ -2,12 +2,14 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function TeacherHomeProject(props) {
   const project = props.project;
+  const history = useHistory()
 
   return (
-    <Box sx={{ p: 2, my: 2, borderRadius: "16px", backgroundColor: "#F2F8FE" }}>
+    <Box sx={{ p: 2, my: 2, borderRadius: "16px", backgroundColor: "#F2F8FE" }} onClick={() => history.push(`/teacher/viewProject/${project._id}`)}>
       <Grid container rowSpacing={2} px={2}>
         <Grid item xs={4}>
           <Typography variant="h6" sx={{ textAlign: "left" }}>

@@ -47,7 +47,12 @@ function App() {
             <Route path="/search">
               <Search></Search>
             </Route>
+
             <Route path="/profile">
+              <Profile></Profile>
+            </Route>
+
+            <Route path="/teacher/viewProject/:projectId">
               <Profile></Profile>
             </Route>
 
