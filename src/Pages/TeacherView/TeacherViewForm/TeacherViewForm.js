@@ -57,7 +57,7 @@ const TeacherViewForm = (props) => {
             .then(res => res.json())
             .then(data => {
                 setProject(data)
-                setlanguageName(Object.values(data.language));
+                setlanguageName(data.language);
                 setcourseCode(data.courseCode);
                 setSection(data.section);
                 setTeacherInitial(data.teacherInitial);
@@ -153,6 +153,7 @@ const TeacherViewForm = (props) => {
 
     // updateProject(project)
 
+    console.log(project);
 
 
 
@@ -164,52 +165,44 @@ const TeacherViewForm = (props) => {
                     <Typography
                         sx={{ textAlign: "left", fontWeight: "bold", color: "#707070" }}
                     >
+                        Student Details
+                    </Typography>
+                    <Box sx={{ my: 1, p: 2, borderRadius: "15px", bgcolor: "#F2F8FE" }}>
+                        <Grid container spacing={1}>
+                            <Grid item xs={12} sm={6}>
+                                <Typography variant="h6" sx={{ textAlign: "left" }}>
+                                    Student ID: {project.student_id}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <Typography variant="h6" sx={{ textAlign: "left" }}>
+                                    Student Name: Mahim
+                                </Typography>
+                            </Grid>
+                        </Grid>
+                    </Box>
+                    <Typography
+                        sx={{ textAlign: "left", fontWeight: "bold", color: "#707070" }}
+                    >
                         Course Details
                     </Typography>
                     <Box sx={{ my: 1, p: 2, borderRadius: "15px", bgcolor: "#F2F8FE" }}>
                         <Grid container spacing={1}>
                             <Grid item xs={12} sm={6}>
-                                <TextField
-                                    id="courseCode"
-                                    name="courseCode"
-                                    label="Course Code"
-                                    variant="outlined"
-                                    onChange={''}
-                                    value={courseCode}
-                                    sx={{ width: "100%", mt: 2 }}
-                                    InputProps={{
-                                        readOnly: true,
-                                    }}
-                                />
+                                <Typography variant="h6" sx={{ textAlign: "left" }}>
+                                    Course Code: {project.courseCode}
+                                </Typography>
                             </Grid>
                             <Grid item xs={0} sm={6}></Grid>
                             <Grid item xs={6} sx={{ mt: 1.5 }}>
-                                <TextField
-                                    id="teacherInitial"
-                                    name="teacherInitial"
-                                    label="Teacher Initial"
-                                    variant="outlined"
-                                    onChange={''}
-                                    value={teacherInitial}
-                                    sx={{ width: "100%", mt: 2 }}
-                                    InputProps={{
-                                        readOnly: true,
-                                    }}
-                                />
+                                <Typography variant="h6" sx={{ textAlign: "left" }}>
+                                    Course Code: {project.teacherInitial}
+                                </Typography>
                             </Grid>
                             <Grid item xs={6} sx={{ mt: 1.5 }}>
-                                <TextField
-                                    id="section"
-                                    name="section"
-                                    label="Section"
-                                    variant="outlined"
-                                    onChange={''}
-                                    value={section}
-                                    sx={{ width: "100%", mt: 2 }}
-                                    InputProps={{
-                                        readOnly: true,
-                                    }}
-                                />
+                                <Typography variant="h6" sx={{ textAlign: "left" }}>
+                                    Course Code: {project.section}
+                                </Typography>
                             </Grid>
                         </Grid>
                     </Box>
@@ -221,32 +214,22 @@ const TeacherViewForm = (props) => {
                     <Box sx={{ my: 1, p: 2, borderRadius: "15px", bgcolor: "#F2F8FE" }}>
                         <Grid container spacing={2}>
                             <Grid item xs={8}>
-                                <TextField
-                                    id="tittle"
-                                    name="tittle"
-                                    label="Tittle"
-                                    variant="outlined"
-                                    sx={{ width: "100%", mt: 2 }}
-                                    onChange={handleChangeTittle}
-                                    value={tittle}
-                                    InputProps={{
-                                        readOnly: true,
-                                    }}
-                                />
+                                <Typography variant="h6" sx={{ textAlign: "left" }}>
+                                    {project.tittle}
+                                </Typography>
                             </Grid>
                             <Grid item xs={4}>
-                                <TextField
-                                    id="languageName"
-                                    name="languageName"
-                                    label="Languages"
-                                    variant="outlined"
-                                    onChange={''}
-                                    value={languageName}
-                                    sx={{ width: "100%", mt: 2 }}
-                                    InputProps={{
-                                        readOnly: true,
-                                    }}
-                                />
+                                {
+                                    languageName.map(language => <Typography key={language} ml={1}
+                                        p={1}
+                                        border={1}
+                                        borderRadius={"15px"}
+                                        variant="p"
+                                        key={language}
+                                    >
+                                        {language}
+                                    </Typography>)
+                                }
                             </Grid>
                         </Grid>
                         <br />
