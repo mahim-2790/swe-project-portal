@@ -10,6 +10,7 @@ import EditProject from './Pages/EditProject/EditProject/EditProject';
 import Search from './Pages/Search/Search/Search';
 import Profile from './Pages/Profile/Profile';
 import TeacherHome from './Pages/TeacherHome/TeacherHome';
+import TeacherView from './Pages/TeacherView/TeacherView/TeacherView';
 
 
 function App() {
@@ -53,7 +54,7 @@ function App() {
             </Route>
 
             <Route path="/teacher/viewProject/:projectId">
-              <Profile></Profile>
+              <TeacherView></TeacherView>
             </Route>
 
             <Route path="/">

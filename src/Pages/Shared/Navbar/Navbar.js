@@ -196,7 +196,7 @@ export default function Navbar(props) {
         </DrawerHeader>
         <Divider />
 
-        {userDetail.role === 'student' ? <List>
+        {userDetail?.role === 'student' ? <List>
           {["Home", "Search Project", "Create Project"].map((text, index) => (
             <ListItem button key={text} onClick={() => handleMenuClick(index)}>
               <ListItemIcon>

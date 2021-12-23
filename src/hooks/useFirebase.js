@@ -153,7 +153,7 @@ const useFirebase = () => {
             let res = await fetch(`http://localhost:5000/users/${user.email}`);
             let data = await res.json();
             setUserDetail(data);
-            // sessionStorage.setItem('user', JSON.stringify(data));
+            sessionStorage.setItem('user', JSON.stringify(data));
         }
         fetchUserDetail();
     }, [user.email]);
