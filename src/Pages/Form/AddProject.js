@@ -166,7 +166,7 @@ export default function AddProject() {
         </Typography>
         <Box sx={{ my: 1, p: 2, borderRadius: "15px", bgcolor: "#F2F8FE" }}>
           <Grid container spacing={1}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={6} >
               <FormControl required sx={{ minWidth: "100%" }}>
                 <InputLabel id="course-code">Course Code</InputLabel>
                 <Select
@@ -184,7 +184,19 @@ export default function AddProject() {
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item xs={0} sm={6}></Grid>
+            <Grid item xs={6}>
+            
+              <TextField
+                  id="semster"
+                  name="semster"
+                  label="Semester"
+                  variant="outlined"
+                  sx={{ width: "100%"}}
+                  onBlur={handleOnChange}
+                  required
+                />
+               
+            </Grid>
             <Grid item xs={6} sx={{ mt: 1.5 }}>
               <FormControl required sx={{ minWidth: "100%" }}>
                 <InputLabel id="course-code">Teacher Initial</InputLabel>
