@@ -12,6 +12,7 @@ const TeacherViewForm = (props) => {
 
 
     const [project, setProject] = useState({});
+    const [student, setStudent] = useState({});
     const [languageName, setlanguageName] = useState([]);
 
 
@@ -24,6 +25,15 @@ const TeacherViewForm = (props) => {
                 setlanguageName(data.language);
             })
     }, [projectId])
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/students/${project?.student_id}`)
+            .then(res => res.json())
+            .then(data => {
+                setStudent(data)
+                console.log(data)
+            })
+    }, [project])
 
 
 
@@ -88,12 +98,12 @@ const TeacherViewForm = (props) => {
                         <Grid container spacing={1}>
                             <Grid item xs={12} sm={6}>
                                 <Typography variant="h6" sx={{ textAlign: "left" }}>
-                                    Student ID: {project.student_id}
+                                    ID: {project.student_id}
                                 </Typography>
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <Typography variant="h6" sx={{ textAlign: "left" }}>
-                                    Student Name: Mahim
+                                    Name: {student?.name}
                                 </Typography>
                             </Grid>
                         </Grid>
