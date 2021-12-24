@@ -192,11 +192,12 @@ const TeacherViewForm = (props) => {
                             </Typography>
                         </Grid>
 
-
+                                    
                         <Button
                             variant="contained"
                             type="Update"
-                            sx={{ mt: 3, px: 9, bgcolor: "#0EA5E9" }}
+                            
+                            sx={{ mt: 3,ml:1,mr:1, px: 9, bgcolor: "#50C878" }}
                             onClick={handleAcceptClick}
                         >
                             Accept
@@ -205,7 +206,7 @@ const TeacherViewForm = (props) => {
                             onClick={handleRejectClick}
                             variant="contained"
                             type="Update"
-                            sx={{ mt: 3, px: 9, bgcolor: "#0EA5E9" }}
+                            sx={{ mt: 3,ml:1,mr:1, px: 9, bgcolor: "#e95c4b" }}
                         >
                             Reject
                         </Button>
