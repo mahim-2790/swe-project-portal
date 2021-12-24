@@ -1,6 +1,8 @@
-import { Button, Chip, FormControl, Grid, InputLabel, MenuItem, OutlinedInput, Select, TextField, Typography } from '@mui/material';
+import { Button, Chip, FormControl, Grid, Link, MenuItem, OutlinedInput, Select, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import CloudCircleIcon from '@mui/icons-material/CloudCircle';
 // import { useHistory } from 'react-router-dom';
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -213,15 +215,16 @@ const TeacherViewForm = (props) => {
                     </Typography>
                     <Box sx={{ my: 1, p: 2, borderRadius: "15px", bgcolor: "#F2F8FE" }}>
                         <Grid container spacing={2}>
-                            <Grid item xs={8}>
-                                <Typography variant="h6" sx={{ textAlign: "left" }}>
+                            <Grid item xs={12}>
+                                <Typography variant="h4" sx={{ textAlign: "left" }}>
                                     {project.tittle}
                                 </Typography>
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={12} style={{display:"flex",  justifyContent:"left"}}>
                                 {
-                                    languageName.map(language => <Typography key={language} ml={1}
+                                    languageName.map(language => <Typography key={language} mr={1}
                                         p={1}
+                                       
                                         border={1}
                                         borderRadius={"15px"}
                                         variant="p"
@@ -233,7 +236,7 @@ const TeacherViewForm = (props) => {
                             </Grid>
                         </Grid>
                         <br />
-                        <TextField
+                        {/* <TextField
                             id="description"
                             name="description"
                             label="Description"
@@ -247,83 +250,39 @@ const TeacherViewForm = (props) => {
                             InputProps={{
                                 readOnly: true,
                             }}
-                        />
+                        /> */}
+                         <Grid item mt={2} xs={12}>
+                                <Typography variant="h6" sx={{ textAlign: "left" }}>
+                                   <span><strong>Description</strong></span><p style={{marginTop:"0"}}>{project.description}</p>
+                                </Typography>
+                        </Grid>
+
                         <br />
                         <Grid container spacing={2}>
                             <Grid item xs={12} md={6}>
-                                <TextField
-                                    id="functional-requirement"
-                                    name="functionalRequirement"
-                                    label="Functional Requirement"
-                                    variant="outlined"
-                                    multiline
-                                    maxRows={10}
-                                    rows={5}
-                                    sx={{ width: "100%", mt: 2 }}
-                                    onChange={handleChangeFunctionalRequirement}
-                                    value={functionalRequirement}
-                                    InputProps={{
-                                        readOnly: true,
-                                    }}
-                                />
+                                <Typography variant="h6" sx={{ textAlign: "left" }}>
+                                   <span><strong>Functional-Requirement</strong></span> <p  style={{marginTop:"0"}}>{project.functionalRequirement}</p>
+                                </Typography>
                             </Grid>
                             <Grid item xs={12} md={6}>
-                                <TextField
-                                    id="non-functional-requirement"
-                                    name="nonFunctionalRequirement"
-                                    label="Non Functional Requirement"
-                                    variant="outlined"
-                                    multiline
-                                    maxRows={10}
-                                    rows={5}
-                                    sx={{ width: "100%", mt: 2 }}
-                                    onChange={handleChangeNonFunctionalRequirement}
-                                    value={nonFunctionalRequirement}
-                                    InputProps={{
-                                        readOnly: true,
-                                    }}
-                                />
-                            </Grid>
+                                     <Typography variant="h6" sx={{ textAlign: "left" }}>
+                                        <span><strong>Nonfunctional-Requirement</strong></span> <p  style={{marginTop:"0"}}>{project.nonFunctionalRequirement}</p>
+                                    </Typography>
+                                </Grid>
                         </Grid>
-                        <TextField
-                            id="github-link"
-                            name="githubLink"
-                            label="Github Link"
-                            variant="outlined"
-                            sx={{ width: "100%", mt: 2 }}
-                            onChange={handleChangeGithubLink}
-                            value={githubLink}
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                        />
-                        <TextField
-                            id="drive-link"
-                            name="driveLink"
-                            label="Drive Link"
-                            variant="outlined"
-                            sx={{ width: "100%", mt: 2 }}
-                            onChange={handleChangeDriveLink}
-                            value={driveLink}
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                        />
-                        <TextField
-                            id="upcoming-feature"
-                            name="upcomingFeature"
-                            label="Upcoming Feature"
-                            variant="outlined"
-                            multiline
-                            maxRows={10}
-                            rows={3}
-                            sx={{ width: "100%", mt: 2 }}
-                            onChange={handleChangeUpcomingFeature}
-                            value={upcomingFeature}
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                        />
+                        <Grid item xs={12} mt={2}>
+                              <Typography variant="h6" sx={{ textAlign: "left" }}>
+                                        <span><strong>Upcoming Feature</strong></span> <p  style={{marginTop:"0"}}>{project.upcomingFeature}</p>
+                             </Typography>
+                        </Grid>
+                        <Grid item xs={12} mt={2}>
+                        <Typography variant="h6" sx={{ textAlign: "left" }}><strong>Links</strong></Typography>
+                            {/* <a target="_blank" href={project.githubLink}><GitHubIcon style={{width:"40px", height:"40px"}}/>  </a> 
+                            <a href='www.google.com'> <CloudCircleIcon style={{width:"40px", height:"40px"}}/> </a>
+                            <Link to="www.google.com" target={'_blank'}>Link</Link> */}
+                            {/* {window.open(project.githubLink) target='_blank'} */}
+                        </Grid>
+                       
 
                         <Button
                             variant="contained"

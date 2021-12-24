@@ -1,4 +1,4 @@
-import { Container, Typography, TextField, Button, Alert } from '@mui/material';
+import { Container, Typography, TextField, Button } from '@mui/material';
 import React, { useState } from 'react';
 import { Grid } from '@mui/material';
 import login from '../../../Asset/images/undraw_programming_re_kg9v.svg'
@@ -59,8 +59,8 @@ const Login = () => {
                             </Typography>
                         </div>
                         {/* {user?.email && <Alert severity="success">Login Successfully</Alert>} */}
-                        {authError && <Alert severity="Error">{authError}</Alert>}
-                        <Button variant="contained" type="submit">Login</Button>
+                        {/* {authError && <Alert severity="Error">{authError}</Alert>} */}
+                        <Button variant="contained" type="submit"  sx={{ mt: 1, px: 9, bgcolor: "#0EA5E9" }}>Login</Button>
                     </form>
                     <Typography variant="caption" display="block" gutterBottom sx={{ mt: 1, textAlign: 'center' }}>
                         New User?<NavLink to="/registration">Register</NavLink>
