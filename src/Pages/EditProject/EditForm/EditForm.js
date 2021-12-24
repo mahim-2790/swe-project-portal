@@ -213,7 +213,7 @@ const EditForm = (props) => {
                                     >
                                         <MenuItem value="MSA">MSA</MenuItem>
                                         <MenuItem value="SsH">SsH</MenuItem>
-                                        <MenuItem value="MR">MR</MenuItem>
+                                        <MenuItem value="MRgit ">MR</MenuItem>
                                     </Select>
                                 </FormControl>
                             </Grid>
