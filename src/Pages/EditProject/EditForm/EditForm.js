@@ -69,6 +69,7 @@ const EditForm = (props) => {
                 setUpcomingFeature(data.upcomingFeature);
             })
     }, [projectId])
+    console.log(teacherInitial);
 
 
     const history = useHistory();
@@ -205,14 +206,14 @@ const EditForm = (props) => {
                                         labelId="teacherInitial"
                                         id="teacherInitial"
                                         name="teacherInitial"
-                                        value={teacherInitial}
                                         label="Teacher Initial"
+                                        value={teacherInitial}
                                         onChange={handleChangeTeacherInitial}
                                         required
                                     >
-                                        <MenuItem value="msa">MSA</MenuItem>
-                                        <MenuItem value="ssh">SsH</MenuItem>
-                                        <MenuItem value="mr">MR</MenuItem>
+                                        <MenuItem value="MSA">MSA</MenuItem>
+                                        <MenuItem value="SsH">SsH</MenuItem>
+                                        <MenuItem value="MR">MR</MenuItem>
                                     </Select>
                                 </FormControl>
                             </Grid>
