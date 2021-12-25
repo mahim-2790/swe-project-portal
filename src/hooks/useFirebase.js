@@ -11,7 +11,7 @@ const useFirebase = () => {
     const [user, setUser] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const [authError, setAuthError] = useState('');
-    // const [admin, setAdmin] = useState(false);
+    const [teacher, setTeacher] = useState(false);
     const [token, setToken] = useState('');
     const [userDetail, setUserDetail] = useState({});
 
@@ -153,6 +153,9 @@ const useFirebase = () => {
             let res = await fetch(`http://localhost:5000/users/${user.email}`);
             let data = await res.json();
             setUserDetail(data);
+            if (data.role === 'teacher') {
+                setTeacher(true);
+            }
             sessionStorage.setItem('user', JSON.stringify(data));
         }
         fetchUserDetail();
@@ -169,7 +172,8 @@ const useFirebase = () => {
         registerUser,
         loginUser,
         logout,
-        userDetail
+        userDetail,
+        teacher
     }
 }
 
