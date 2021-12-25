@@ -130,8 +130,8 @@ const Register = () => {
                         <Typography variant="caption" display="block" gutterBottom sx={{ mt: 2, textAlign: 'center' }}>
                             Already have an account?<NavLink to="/login">Login</NavLink>
                         </Typography>
-                        {user?.email && <Alert severity="success">User Created successfully!</Alert>}
-                        {authError && <Alert severity="error">{authError}</Alert>}
+                        {user?.email && <div severity="success">User Created successfully!</div>}
+                        {authError && <div severity="error">{authError}</div>}
                     </Grid>
 
 
