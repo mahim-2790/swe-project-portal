@@ -5,6 +5,7 @@ import useAuth from './../../../hooks/useAuth';
 import LandingHeader from '../LandingHeader/LandingHeader';
 import Grid from "@mui/material/Grid";
 import illastrateRegistration from "../../../Asset/images/registration_undraw.svg"
+import Footer from '../../Footer/Footer';
 
 const Register = () => {
     const [loginData, setLoginData] = useState({});
@@ -139,6 +140,7 @@ const Register = () => {
 
 
             </Container >
+            <Footer></Footer>
         </div>
     );
 };

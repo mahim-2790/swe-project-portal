@@ -16,7 +16,7 @@ export default function TeacherHomeProject(props) {
   }
 
   return (
-    <Box sx={{ p: 2, my: 2, borderRadius: "16px", backgroundColor: "#F2F8FE" }} onClick={() => history.push(`/teacher/viewProject/${project._id}`)}>
+    <Box sx={{ p: 2, my: 2, borderRadius: "16px", backgroundColor: "#F5F5F5" }} onClick={() => history.push(`/teacher/viewProject/${project._id}`)}>
       <Grid container rowSpacing={2} px={2}>
         <Grid item xs={4}>
           <Typography variant="h6" sx={{ textAlign: "left" }}>
