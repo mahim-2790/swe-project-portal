@@ -185,17 +185,17 @@ export default function AddProject() {
               </FormControl>
             </Grid>
             <Grid item xs={6}>
-            
+
               <TextField
-                  id="semster"
-                  name="semster"
-                  label="Semester"
-                  variant="outlined"
-                  sx={{ width: "100%"}}
-                  onBlur={handleOnChange}
-                  required
-                />
-               
+                id="semster"
+                name="semster"
+                label="Semester e.i fall-2021"
+                variant="outlined"
+                sx={{ width: "100%" }}
+                onBlur={handleOnChange}
+                required
+              />
+
             </Grid>
             <Grid item xs={6} sx={{ mt: 1.5 }}>
               <FormControl required sx={{ minWidth: "100%" }}>
@@ -339,7 +339,6 @@ export default function AddProject() {
             variant="outlined"
             sx={{ width: "100%", mt: 2 }}
             onBlur={handleOnChange}
-            required
           />
           <TextField
             id="drive-link"
@@ -348,7 +347,6 @@ export default function AddProject() {
             variant="outlined"
             sx={{ width: "100%", mt: 2 }}
             onBlur={handleOnChange}
-            required
           />
           <TextField
             id="upcoming-feature"
@@ -360,7 +358,6 @@ export default function AddProject() {
             rows={3}
             sx={{ width: "100%", mt: 2 }}
             onBlur={handleOnChange}
-            required
           />
 
           <Button

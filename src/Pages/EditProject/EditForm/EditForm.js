@@ -346,7 +346,7 @@ const EditForm = (props) => {
                             sx={{ width: "100%", mt: 2 }}
                             onChange={handleChangeGithubLink}
                             value={githubLink}
-                            required
+
                         />
                         <TextField
                             id="drive-link"
@@ -356,7 +356,7 @@ const EditForm = (props) => {
                             sx={{ width: "100%", mt: 2 }}
                             onChange={handleChangeDriveLink}
                             value={driveLink}
-                            required
+
                         />
                         <TextField
                             id="upcoming-feature"
@@ -369,18 +369,26 @@ const EditForm = (props) => {
                             sx={{ width: "100%", mt: 2 }}
                             onChange={handleChangeUpcomingFeature}
                             value={upcomingFeature}
-                            required
+
                         />
 
                         <Button
                             variant="contained"
-                            type="Update"
+                            type="submit"
                             sx={{ mt: 3, px: 9, bgcolor: "#0EA5E9" }}
                         >
-                            Submit
+                            Update
+                        </Button>
+                        <Button
+                            variant="contained"
+                            sx={{ mt: 3, px: 9, bgcolor: "#0EA5E9" }}
+                            onClick={() => { history.push('/home') }}
+                        >
+                            Cancel
                         </Button>
                     </Box>
                 </form>
+
             </Box>
         </div>
     );
