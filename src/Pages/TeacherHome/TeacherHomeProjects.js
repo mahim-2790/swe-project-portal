@@ -34,17 +34,19 @@ const TeacherHomeProjects = () => {
 
     const handleChangeSemester = (event) => {
         setSemester(event.target.value);
+        event.preventDefault();
     };
 
     const handleIdOnChnage = e => {
         setSearchId(e.target.value);
+        e.preventDefault();
     };
     console.log(semester, searchId);
 
     useEffect(() => {
         let filtered = [];
         if (semester) {
-            filtered = projects.filter(project => project?.semester.toLowerCase() === semester.toLowerCase());
+            filtered = projects.filter(project => project?.semester === semester.toLowerCase());
             setFilteredProject(filtered);
 
             if (searchId) {
