@@ -153,7 +153,7 @@ const useFirebase = () => {
             let res = await fetch(`https://secure-ravine-11487.herokuapp.com/users/${user.email}`);
             let data = await res.json();
             setUserDetail(data);
-            if (data.role === 'teacher') {
+            if (data?.role === 'teacher') {
                 setTeacher(true);
             }
             sessionStorage.setItem('user', JSON.stringify(data));
