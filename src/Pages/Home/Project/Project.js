@@ -13,7 +13,7 @@ export default function Project(props) {
   const handleDelete = (id) => {
     const confirmDelete = window.confirm('The Project will be deleted forever!! ARE YOU SURE?');
     if (confirmDelete) {
-      fetch(`http://localhost:5000/projects/${id}`, {
+      fetch(`https://secure-ravine-11487.herokuapp.com/projects/${id}`, {
         method: 'DELETE'
       }).then(res => res.json())
         .then(data => {

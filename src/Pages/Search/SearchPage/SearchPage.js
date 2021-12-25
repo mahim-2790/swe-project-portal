@@ -8,7 +8,7 @@ const SearchPage = () => {
     const [allProjects, setAllProjects] = useState([]);
     const [sendProjects, setSendProjects] = useState(allProjects);
     useEffect(() => {
-        fetch(`http://localhost:5000/projects`)
+        fetch(`https://secure-ravine-11487.herokuapp.com/projects`)
             .then(res => res.json())
             .then(data => {
                 setAllProjects(data)

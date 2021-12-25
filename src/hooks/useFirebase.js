@@ -104,7 +104,7 @@ const useFirebase = () => {
 
     const saveUser = (id, email, displayName, role, method) => {
         const user = { id, email, displayName, role };
-        fetch('http://localhost:5000/users', {
+        fetch('https://secure-ravine-11487.herokuapp.com/users', {
             method: method,
             headers: {
                 'content-type': 'application/json'
@@ -128,7 +128,7 @@ const useFirebase = () => {
     };
 
     const saveAsTeacher = (newTeacher, method) => {
-        fetch('http://localhost:5000/teachers', {
+        fetch('https://secure-ravine-11487.herokuapp.com/teachers', {
             method: method,
             headers: {
                 'content-type': 'application/json'
@@ -138,7 +138,7 @@ const useFirebase = () => {
     };
 
     const saveAsStudent = (newStudent, method) => {
-        fetch('http://localhost:5000/students', {
+        fetch('https://secure-ravine-11487.herokuapp.com/students', {
             method: method,
             headers: {
                 'content-type': 'application/json'
@@ -150,7 +150,7 @@ const useFirebase = () => {
 
     useEffect(() => {
         async function fetchUserDetail() {
-            let res = await fetch(`http://localhost:5000/users/${user.email}`);
+            let res = await fetch(`https://secure-ravine-11487.herokuapp.com/users/${user.email}`);
             let data = await res.json();
             setUserDetail(data);
             if (data.role === 'teacher') {

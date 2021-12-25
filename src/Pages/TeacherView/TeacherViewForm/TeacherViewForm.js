@@ -18,7 +18,7 @@ const TeacherViewForm = (props) => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/project/${projectId}`)
+        fetch(`https://secure-ravine-11487.herokuapp.com/project/${projectId}`)
             .then(res => res.json())
             .then(data => {
                 setProject(data)
@@ -27,7 +27,7 @@ const TeacherViewForm = (props) => {
     }, [projectId])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/students/${project?.student_id}`)
+        fetch(`https://secure-ravine-11487.herokuapp.com/students/${project?.student_id}`)
             .then(res => res.json())
             .then(data => {
                 setStudent(data)
@@ -62,7 +62,7 @@ const TeacherViewForm = (props) => {
             }
         }
 
-        fetch(`http://localhost:5000/updateProject/${project._id}`, {
+        fetch(`https://secure-ravine-11487.herokuapp.com/updateProject/${project._id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -192,12 +192,12 @@ const TeacherViewForm = (props) => {
                             </Typography>
                         </Grid>
 
-                                    
+
                         <Button
                             variant="contained"
                             type="Update"
-                            
-                            sx={{ mt: 3,ml:1,mr:1, px: 9, bgcolor: "#50C878" }}
+
+                            sx={{ mt: 3, ml: 1, mr: 1, px: 9, bgcolor: "#50C878" }}
                             onClick={handleAcceptClick}
                         >
                             Accept
@@ -206,7 +206,7 @@ const TeacherViewForm = (props) => {
                             onClick={handleRejectClick}
                             variant="contained"
                             type="Update"
-                            sx={{ mt: 3,ml:1,mr:1, px: 9, bgcolor: "#e95c4b" }}
+                            sx={{ mt: 3, ml: 1, mr: 1, px: 9, bgcolor: "#e95c4b" }}
                         >
                             Reject
                         </Button>

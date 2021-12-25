@@ -111,7 +111,7 @@ export default function AddProject() {
 
 
   const pushProject = () => {
-    fetch('http://localhost:5000/projects', {
+    fetch('https://secure-ravine-11487.herokuapp.com/projects', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -127,7 +127,7 @@ export default function AddProject() {
 
   const handleOnSubmit = e => {
 
-    fetch(`http://localhost:5000/projects`)
+    fetch(`https://secure-ravine-11487.herokuapp.com/projects`)
       .then(res => res.json())
       .then(data => setAllProjects(data))
 

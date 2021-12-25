@@ -52,7 +52,7 @@ const EditForm = (props) => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/project/${projectId}`)
+        fetch(`https://secure-ravine-11487.herokuapp.com/${projectId}`)
             .then(res => res.json())
             .then(data => {
                 setProject(data)
@@ -138,7 +138,7 @@ const EditForm = (props) => {
 
     const updateProject = (obj) => {
 
-        fetch(`http://localhost:5000/updateProject/${project._id}`, {
+        fetch(`https://secure-ravine-11487.herokuapp.com/${project._id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

@@ -14,7 +14,7 @@ const TeacherHomeProjects = () => {
 
     useEffect(() => {
         async function getTeacher() {
-            let res = await fetch(`http://localhost:5000/teachers/${userDetail?.id}`);
+            let res = await fetch(`https://secure-ravine-11487.herokuapp.com/teachers/${userDetail?.id}`);
             let data = await res.json();
             setTeacher(data);
         }
@@ -23,7 +23,7 @@ const TeacherHomeProjects = () => {
 
     useEffect(() => {
         async function fetchProjects() {
-            let res = await fetch(`http://localhost:5000/teacher/projects/${teacher?.teacherInitial}`);
+            let res = await fetch(`https://secure-ravine-11487.herokuapp.com/teacher/projects/${teacher?.teacherInitial}`);
             let data = await res.json();
             setProjects(data);
             setFilteredProject(data);

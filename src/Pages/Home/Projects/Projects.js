@@ -7,7 +7,7 @@ const Projects = () => {
     // console.log('useDetails from project', userDetail);
     useEffect(() => {
         async function fetchProjects() {
-            let res = await fetch(`http://localhost:5000/projects/${userDetail?.id}`);
+            let res = await fetch(`https://secure-ravine-11487.herokuapp.com/projects/${userDetail?.id}`);
             let data = await res.json();
             setProjects(data);
             sessionStorage.setItem('user', JSON.stringify(userDetail));
