@@ -8,9 +8,10 @@ import Register from './Pages/Login/Register/Register';
 import CreateProject from './Pages/Form/CreateProject/CreateProject';
 import EditProject from './Pages/EditProject/EditProject/EditProject';
 import Search from './Pages/Search/Search/Search';
-import Profile from './Pages/Profile/Profile';
+
 import TeacherHome from './Pages/TeacherHome/TeacherHome';
 import TeacherView from './Pages/TeacherView/TeacherView/TeacherView';
+import ProfilewithNav from './Pages/Profile/ProfilewithNav';
 
 
 function App() {
@@ -50,7 +51,7 @@ function App() {
             </Route>
 
             <Route path="/profile">
-              <Profile></Profile>
+              <ProfilewithNav></ProfilewithNav>
             </Route>
 
             <Route path="/teacher/viewProject/:projectId">

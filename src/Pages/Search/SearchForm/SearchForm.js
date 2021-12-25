@@ -60,7 +60,7 @@ export default function SearchForm(props) {
   };
 
   return (
-    <Box sx={{ my: 1, p: 2, borderRadius: "15px", bgcolor: "#F2F8FE" }}>
+    <Box sx={{ my: 2, p: 2, borderRadius: "15px", bgcolor: "#F5F5F5" }}>
       <Typography
         sx={{ textAlign: "left", fontWeight: "bold", color: "#707070" }}
       >

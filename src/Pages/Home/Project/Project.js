@@ -6,10 +6,20 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Typography } from "@mui/material";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { NavLink } from "react-router-dom";
+import CircleIcon from '@mui/icons-material/Circle';
 
 export default function Project(props) {
   const project = props.project;
   const history = useHistory();
+
+  let statusColor = "#808000";
+  if(project.status === "Accepted"){
+    statusColor = "#008000";
+  }else if(project.status === "pending"){
+    statusColor = "#CCCC00";
+  }
+
+
   const handleDelete = (id) => {
     const confirmDelete = window.confirm('The Project will be deleted forever!! ARE YOU SURE?');
     if (confirmDelete) {
@@ -25,7 +35,7 @@ export default function Project(props) {
     }
   };
   return (
-    <Box sx={{ p: 2, mb: 1, borderRadius: "16px", backgroundColor: "#F2F8FE" }}>
+    <Box sx={{ p: 2, mb: 2, borderRadius: "16px", backgroundColor: "#F5F5F5" }}>
       <Grid container rowSpacing={2}>
         <Grid item xs={11}>
           <Typography variant="h6" sx={{ textAlign: "left" }}>
@@ -41,7 +51,7 @@ export default function Project(props) {
             justifyContent: "center"
           }}
         >
-          <DeleteForeverIcon onClick={() => { handleDelete(project._id) }} sx={{ cursor: 'pointer' }} />
+          <DeleteForeverIcon  onClick={() => { handleDelete(project._id) }} sx={{ cursor: 'pointer', color:"#E30B5C" }} />
         </Grid>
         <Grid item xs={12} sx={{ textAlign: "left" }}>
           <Typography variant="h5" sx={{ textAlign: "left" }}>
@@ -54,7 +64,7 @@ export default function Project(props) {
         <Grid item xs={11}>
           <Grid container >
             <Grid item xs={6} sm={3} sx={{ textAlign: "left" }}>
-              <p>Status: {project.status}</p>
+              <p>Status: <CircleIcon style={{color:statusColor, height:"20px", width:"20px"}} /> {project.status}</p>
             </Grid>
             <Grid item xs={6} sm={4}>
               <p>Date: {project.date}</p>

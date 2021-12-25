@@ -24,11 +24,12 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import useAuth from '../../../hooks/useAuth';
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import diuLogo from '../../../Asset/images/daffodil-international-university-logo.png';
 
 
 
 const drawerWidth = 240;
-const settings = ["Profile", "Account", "Logout"];
+const settings = ["Profile",  "Logout"];
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create("width", {
@@ -151,7 +152,8 @@ export default function Navbar(props) {
           >
             <MenuIcon sx={{ color: "#0EA5E9" }} />
           </IconButton>
-          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, color: "#707070" }}>
+          <img src={diuLogo} alt="logo" style={{ width: 35 }} />
+          <Typography variant="h6" pl={1} align="left" noWrap component="div" sx={{ flexGrow: 1, color: "#707070" }}>
             SWE Project Portal
           </Typography>
           <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

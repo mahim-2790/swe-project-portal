@@ -164,7 +164,7 @@ export default function AddProject() {
         >
           Course Details
         </Typography>
-        <Box sx={{ my: 1, p: 2, borderRadius: "15px", bgcolor: "#F2F8FE" }}>
+        <Box sx={{ my: 1, p: 2, borderRadius: "15px", bgcolor: "#F5F5F5" }}>
           <Grid container spacing={1}>
             <Grid item xs={6} >
               <FormControl required sx={{ minWidth: "100%" }}>
@@ -243,7 +243,7 @@ export default function AddProject() {
         >
           Project Details
         </Typography>
-        <Box sx={{ my: 1, p: 2, borderRadius: "15px", bgcolor: "#F2F8FE" }}>
+        <Box sx={{ my: 1, p: 2, borderRadius: "15px", bgcolor: "#F8F8FF" }}>
           <Grid container spacing={2}>
             <Grid item xs={8}>
               <TextField
