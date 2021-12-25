@@ -123,12 +123,12 @@ const TeacherViewForm = (props) => {
                             <Grid item xs={0} sm={6}></Grid>
                             <Grid item xs={6} sx={{ mt: 1.5 }}>
                                 <Typography variant="h6" sx={{ textAlign: "left" }}>
-                                    Course Code: {project.teacherInitial}
+                                    Teacher Initial: {project.teacherInitial}
                                 </Typography>
                             </Grid>
                             <Grid item xs={6} sx={{ mt: 1.5 }}>
                                 <Typography variant="h6" sx={{ textAlign: "left" }}>
-                                    Course Code: {project.section}
+                                    Sector: {project.section}
                                 </Typography>
                             </Grid>
                         </Grid>
