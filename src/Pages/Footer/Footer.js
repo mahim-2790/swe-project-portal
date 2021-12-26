@@ -33,9 +33,9 @@ export default function Footer() {
                 </Grid>
                 <Grid item xs={12} sm={4}>
                     <Typography variant='h4' style={{color:"#3b566e"}}>Get In Touch</Typography>
-                    <Typography color={"#3b566e"} align='left' variant='subtitle1'>Islam Tower, Sobhanbag, Mirpur Rd Dhaka-1207</Typography>
-                    <Typography color={"#3b566e"} align='left' variant='subtitle1'>daffodilvarsity.edu.bd/department/swe</Typography>
-                    <Typography color={"#3b566e"} align='left' variant='subtitle1'>Contact: 124-36-5956</Typography>
+                    <Typography color={"#3b566e"} align='left' variant='subtitle1'>Islam Tower, Sobhanbag,<br></br>Mirpur Rd Dhaka-1207</Typography>
+                    <Typography mt={1} color={"#3b566e"} align='left' variant='subtitle1'>daffodilvarsity.edu.bd/department/swe</Typography>
+                    <Typography mt={1} color={"#3b566e"} align='left' variant='subtitle1'>Contact: 124-36-5956</Typography>
 
 
                 </Grid>
