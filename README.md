@@ -1,5 +1,6 @@
 # SWE Project Portal
 This is a project for our university. The app is for students and teacher. Throughout the university years we do various projects. But generating idea is difficult. Some time the project gets duplicated. This app is to prevent this kind of situations.
+
 Main features are:
 
     * Students can create project 
